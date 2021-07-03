@@ -414,7 +414,7 @@ function ProductCard({ name, imageMain, priceOriginal, discountPercent, price, d
           // data-item-price={price}
           // data-item-price="{&quot;usd&quot;: 20, &quot;cad&quot;: 25}"
           // data-item-price='{"usd": 20, "cad": 25}'
-          data-item-price={`{"usd": ${price}, "eur": ${Math.round(+price * 1.2)}, "aud": ${Math.round(+price * 0.5)}}`}
+          // data-item-price={`{"usd": ${price}, "eur": ${Math.round(+price * 1.2)}, "aud": ${Math.round(+price * 0.5)}}`}
           // data-item-price="{&quot;usd&quot;: 20, &quot;cad&quot;: 25}">
           // data-item-price={`{&quot;usd&quot;: ${+price}, &quot;eur&quot;: ${+price}, &quot;aud&quot;: ${+price}}`}
           data-item-url="/"
