@@ -7,3 +7,17 @@ body {
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
 }
+
+
+.snipcart-base-button__label {
+  font-size: large
+}
+
+.snipcart-summary-fees__notice {
+    display: none;
+}
+
+.snipcart-cart__footer {
+    border-top: var(--chakra-colors-gray-100);
+}
+
