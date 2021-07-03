@@ -348,10 +348,10 @@ function ProductCard({ name, imageMain, priceOriginal, discountPercent, price, d
   }, "");
 
   // Update cart with size before open
-  React.useEffect(() => {
-    if (!btnRef.current) return;
-    btnRef.current.setAttribute("data-item-custom1-value", sizes[activeSizeIndex]);
-  }, [activeSizeIndex]);
+  // React.useEffect(() => {
+  //   if (!btnRef.current) return;
+  //   btnRef.current.setAttribute("data-item-custom1-value", sizes[activeSizeIndex]);
+  // }, [activeSizeIndex]);
 
   // Update cart with color before open
   // React.useEffect(() => {
