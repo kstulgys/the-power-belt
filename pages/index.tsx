@@ -33,6 +33,7 @@ import {
   useDisclosure,
   useTheme,
   Icon,
+  Link,
 } from "@chakra-ui/react";
 import { products } from "src/utils/products";
 // import { Header, Main, Cards, Footer } from "@components";
@@ -93,9 +94,10 @@ const Home: React.FC = () => {
           </Stack>
         </Container>
       </Stack> */}
+      <Navigation />
       <Heading onClick={onClick} />
-      <TrustBadges />
       <SectionBlock />
+      <TrustBadgesv2 />
       <OrderProduct orderSectionRef={orderSectionRef} />
       <Container>
         <Stack isInline py={20} spacing={20}>
@@ -104,14 +106,33 @@ const Home: React.FC = () => {
           })}
         </Stack>
       </Container>
-      <GetFreeContent />
+      <Footer />
+      {/* <GetFreeContent /> */}
     </>
   );
 };
 
+function Footer() {
+  return (
+    <Container>
+      <Stack py={40}>
+        <Text>Footer</Text>
+      </Stack>
+      <Stack isInline justifyContent="center">
+        <Text fontSize="sm">
+          Created with 💙 by{" "}
+          <Link href="https://linkedin.com" isExternal>
+            kastproductions
+          </Link>
+        </Text>
+      </Stack>
+    </Container>
+  );
+}
+
 function OrderProduct({ orderSectionRef }) {
   return (
-    <Stack height="100vh" bg="gray.100" ref={orderSectionRef}>
+    <Stack height="100vh" py={32} bg="gray.100" ref={orderSectionRef}>
       <Container>
         <Stack isInline>
           <Stack flex={1}>
@@ -128,45 +149,71 @@ function OrderProduct({ orderSectionRef }) {
 
 function Heading({ onClick }) {
   return (
-    <Stack height="60vh" bg="gray.900" color="white" isInline flex={0.6} alignItems="center">
-      <Container maxW="8xl">
-        <Stack isInline>
-          <Stack flex={0.4}>
-            <Text pb={16} fontSize="7xl" fontWeight="bold" lineHeight="none" m={0}>
-              <Box color="red.500">#1 Pro Grade </Box>Weight Lifting Belt
-            </Text>
-            <Stack>
-              <Stack isInline justifyContent="space-between" alignItems="center" width="60%">
-                <Box>
-                  <Text color="white" fontSize="3xl" fontWeight="semibold" textDecor="line-through" m={0}>
-                    $299
-                  </Text>
-                </Box>
-                <Box>
-                  <Text color="red.500" fontSize="5xl" fontWeight="semibold" m={0}>
-                    $139
-                  </Text>
-                </Box>
-                <Box>
-                  <Badge fontSize="xl" bg="white">
-                    save 30%
-                  </Badge>
+    <Stack height="calc(60vh - 5rem)" color="gray.900" flex={0.6} spacing={0} width="full">
+      <Stack height="full" isInline alignItems="flex-end">
+        <Container maxW="8xl">
+          <Stack width="full" isInline alignItems="center" justifyContent="center">
+            <Stack flex={0.5}>
+              <Text pb={16} fontSize="7xl" fontWeight="bold" lineHeight="none" m={0}>
+                <Box color="blue.400">#1 Pro Grade </Box>Weight Lifting Belt
+              </Text>
+              <Stack>
+                <Stack isInline justifyContent="space-between" alignItems="center" width="60%" spacing={4}>
+                  <Box>
+                    <Text color="gray.400" fontSize="3xl" fontWeight="semibold" textDecor="line-through" m={0}>
+                      $299
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text color="blue.400" fontSize="5xl" fontWeight="semibold" m={0}>
+                      $139
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Badge
+                      variant="unslyled"
+                      fontSize="xl"
+                      bg="gray.100"
+                      color="gray.900"
+                      borderColor="gray.900"
+                      borderWidth="1px"
+                      rounded="md"
+                      px={2}
+                      py={1}
+                      // p={0}
+                    >
+                      save 30%
+                      {/* save 30% 🙀 */}
+                    </Badge>
+                  </Box>
+                </Stack>
+                <Box width="60%">
+                  <Button
+                    onClick={onClick}
+                    width="full"
+                    fontSize="2xl"
+                    fontWeight="semibold"
+                    color="white"
+                    bg="gray.900"
+                    height={16}
+                    _hover={{
+                      bg: "gray.900",
+                      boxShadow: "#60A5FA 0px 0px 0px 4px",
+                    }}
+                  >
+                    ORDER NOW
+                  </Button>
                 </Box>
               </Stack>
-              <Box width="60%">
-                <Button onClick={onClick} width="full" fontSize="2xl" fontWeight="semibold" color="white" bg="red.500" height={16} _hover={{ bg: "red.400" }}>
-                  ORDER NOW
-                </Button>
+            </Stack>
+            <Stack isInline flex={0.5} alignItems="center" justifyContent="flex-end">
+              <Box>
+                <Image width="xl" src="/images/belts/sbd-aqua.png" objectFit="cover" />
               </Box>
             </Stack>
           </Stack>
-          <Stack isInline flex={0.6} alignItems="center" justifyContent="center">
-            <Box>
-              <Image width="xl" src="/images/main.png" objectFit="cover" />
-            </Box>
-          </Stack>
-        </Stack>
-      </Container>
+        </Container>
+      </Stack>
     </Stack>
   );
 }
@@ -174,10 +221,31 @@ function Heading({ onClick }) {
   /* <img alt="Trust Badges" src="https://trustlock.co/wp-content/uploads/2019/01/credit-card-logos-free-png-image-trans.png" width="294" height="60" /> */
 }
 
+function TrustBadgesv2() {
+  return (
+    <Container maxW="8xl">
+      <Stack spacing={32} isInline alignItems="center" justifyContent="center" py={20}>
+        <Box>
+          <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={40} />
+        </Box>
+        <Box>
+          <Image src="/trust-badges/Money-back_Guarantee_Badge.svg" height={40} />
+        </Box>
+        <Box>
+          <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={40} />
+        </Box>
+        <Box>
+          <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={40} />
+        </Box>
+      </Stack>
+    </Container>
+  );
+}
+
 function TrustBadges() {
   return (
-    <Stack mt={-8} height="7.5vh" isInline justifyContent="center" alignItems="center">
-      <Stack spacing={5} isInline alignItems="center" bg="white" height="full" rounded="md" boxShadow="xl" px={5}>
+    <Container maxW="8xl">
+      <Stack spacing={32} isInline alignItems="center">
         <Box>
           {/* <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={20} /> */}
           <Image
@@ -185,7 +253,7 @@ function TrustBadges() {
             alt="Trust Badges"
             src="https://trustlock.co/wp-content/uploads/2019/01/free-shipping-icon-graphic-2.png"
             objectFit="cover"
-            height={9}
+            // height={9}
           />
         </Box>
         <Box>
@@ -194,7 +262,7 @@ function TrustBadges() {
             alt="Trust Badges"
             src="https://trustlock.co/wp-content/uploads/2019/01/30-day-money-back-guarantee-badge-4.png"
             objectFit="cover"
-            height={9}
+            // height={9}
           />
           {/* <Image src="/trust-badges/Money-back_Guarantee_Badge.svg"/> */}
         </Box>
@@ -204,7 +272,7 @@ function TrustBadges() {
             alt="Trust Badges"
             src="https://trustlock.co/wp-content/uploads/2019/01/ssl-secure-trust-badge-free.png"
             objectFit="cover"
-            height={9}
+            // height={9}
           />
           {/* <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={20} /> */}
         </Box>
@@ -214,12 +282,12 @@ function TrustBadges() {
             alt="Trust Badges"
             src="https://trustlock.co/wp-content/uploads/2019/01/satisisfaction-guaranteed-badge-icon.png"
             objectFit="cover"
-            height={9}
+            // height={9}
           />
           {/* <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={20} /> */}
         </Box>
       </Stack>
-    </Stack>
+    </Container>
   );
 }
 
@@ -249,21 +317,22 @@ function SaleBaner() {
 
 function SectionBlock() {
   return (
-    <Stack isInline bg="white" mt={-8} mb="-0.75rem" height="40vh">
-      <Container>
-        <Stack isInline height="full" alignItems="center">
-          <Stack isInline>
+    <Container maxW="8xl">
+      <Stack height="40vh" isInline py={32}>
+        <Stack isInline>
+          <Stack isInline flex={1}></Stack>
+          <Stack isInline flex={1}>
             <Text lineHeight="taller" as="span" textAlign="center" m={0} fontSize="3xl" fontWeight="bold">
               We are working with{" "}
-              <Box as="span" bg="red.500" color="white" px={2}>
+              <Box as="span" bg="blue.400" color="white" px={2}>
                 #1 sports equptment manufacturer
               </Box>{" "}
               in the world to provide you the best quality products and customer satisfaction
             </Text>
           </Stack>
         </Stack>
-      </Container>
-    </Stack>
+      </Stack>
+    </Container>
   );
 }
 
@@ -272,6 +341,8 @@ function Navigation() {
   const selectRef = React.useRef<HTMLSelectElement>(null);
   const [_, rerender] = React.useReducer((state, _) => state + 1, 0);
   // const [currentCurrency, setCurrentCurrency] = React.useState("usd");
+  const [isFixed, setIsFixed] = React.useState(false);
+
   // const theme = useTheme();
   React.useEffect(() => {
     document.addEventListener("snipcart.ready", () => {
@@ -294,45 +365,112 @@ function Navigation() {
     // };
   });
 
+  // const header = document.getElementById("myHeader");
+  // const sticky = header.offsetTop;
+
+  // function myFunction() {
+  //   if (window.pageYOffset > sticky) {
+  //     header.classList.add("sticky");
+  //   } else {
+  //     header.classList.remove("sticky");
+  //   }
+  // }
+
+  const navRef = React.useRef(null);
+  React.useEffect(() => {
+    const header = navRef.current;
+    const sticky = header.offsetTop;
+    function myFunction() {
+      setIsFixed(window.pageYOffset > sticky);
+      // setIsFixed(true);
+    }
+
+    window.addEventListener("scroll", myFunction);
+    return () => {
+      window.removeEventListener("scroll", myFunction);
+    };
+  });
+
+  const fixedHeaderProps = {
+    position: "fixed",
+    bg: "white",
+    top: 0,
+    width: "full",
+    boxShadow: "sm",
+  };
+
+  const headerProps = isFixed ? fixedHeaderProps : {};
+
   return (
-    <Stack bg="white">
-      <Container>
-        <Stack isInline height="16" alignItems="center">
-          <Stack flex={1}>
-            <Text>Left</Text>
+    <>
+      <Stack height="2.5rem" bg="gray.900" isInline alignItems="center" spacing={0}>
+        <Container>
+          <Stack isInline justifyContent="center">
+            <Text m={0} fontWeight="medium" color="white">
+              FREE 5-9 days international shipping
+            </Text>
           </Stack>
-          <Stack flex={1}>
-            <Text>center</Text>
-          </Stack>
-          <Stack flex={1} isInline justifyContent="flex-end" alignItems="center">
-            <Box>
-              <Button variant="unstyled" className="snipcart-checkout">
-                <Icon as={FiShoppingCart} fontSize="2xl" />
-              </Button>
-            </Box>
-            {/* <Box>
+        </Container>
+      </Stack>
+      <Stack ref={navRef} transition="all 0.3s ease-in-out" zIndex={10} {...headerProps} spacing={0}>
+        <Container maxW="8xl">
+          <Stack isInline height={20} alignItems="center">
+            <Stack flex={1} isInline>
+              <Text m={0} fontWeight="bold" fontSize="2xl">
+                #ThePowerBelt
+              </Text>
+            </Stack>
+            <Stack flex={1} isInline justifyContent="center" spacing={6}>
+              <Box>
+                <Link>FAQ</Link>
+              </Box>
+              <Box>
+                <Link>Order Tracking</Link>
+              </Box>
+              <Box>
+                <Link>Contact</Link>
+              </Box>
+            </Stack>
+            <Stack spacing={5} flex={1} isInline justifyContent="flex-end" alignItems="center">
+              <Box>
+                <Button variant="unstyled" className="snipcart-checkout">
+                  <Icon as={FiShoppingCart} fontSize="2xl" />
+                </Button>
+              </Box>
+              {/* <Box>
               <Button variant="unstyled" className="snipcart-total-price">
                 <Icon as={FiShoppingCart} fontSize="2xl" />
               </Button>
             </Box> */}
-            <Select
-              ref={selectRef}
-              // value={currentCurrency}
-              id="currencies"
-              // onChange={(e) => setCurrentCurrency(e.target.value)}
-              width={24}
-              borderColor="gray.900"
-              fontWeight="semibold"
-              _hover={{}}
-            >
-              <option value="usd">usd</option>
-              <option value="eur">eur</option>
-              <option value="aud">aud</option>
-            </Select>
+              <Select
+                ref={selectRef}
+                // value={currentCurrency}
+                id="currencies"
+                // onChange={(e) => setCurrentCurrency(e.target.value)}
+                width={24}
+                borderColor="gray.900"
+                fontWeight="semibold"
+                _hover={{
+                  boxShadow: "#60A5FA 0px 0px 0px 4px",
+                  cursor: "pointer",
+                }}
+                _active={{
+                  boxShadow: "#60A5FA 0px 0px 0px 4px",
+                }}
+                _visited={{
+                  boxShadow: "#60A5FA 0px 0px 0px 4px",
+                }}
+              >
+                <option value="usd">USD</option>
+                <option value="eur">EUR</option>
+                <option value="aud">AUD</option>
+              </Select>
+            </Stack>
           </Stack>
-        </Stack>
-      </Container>
-    </Stack>
+        </Container>
+      </Stack>
+      <Box pt={isFixed ? "5rem" : 0} />
+    </>
   );
 }
 

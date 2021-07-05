@@ -1,4 +1,4 @@
-html,
+/* html,
 body {
     margin: 0;
     padding: 0;
@@ -6,8 +6,11 @@ body {
         "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif,
         "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
         "Noto Color Emoji";
-}
+} */
 
+.snipcart > * {
+    font-family: 'Poppins' !important;
+}
 
 .snipcart-base-button__label {
   font-size: large
