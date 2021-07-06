@@ -359,7 +359,7 @@ function Navigation() {
             </Stack>
             <Stack order={[3]} spacing={5} flex={1} isInline justifyContent="flex-end" alignItems="center">
               <Box order={[2]} pl={[3, 5]}>
-                <Button variant="unstyled" className="snipcart-checkout" size={["sm"]}>
+                <Button variant="unstyled" className="snipcart-checkout" size="sm">
                   <Icon as={FiShoppingCart} fontSize={["xl", "2xl"]} />
                 </Button>
               </Box>
