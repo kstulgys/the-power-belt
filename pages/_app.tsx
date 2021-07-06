@@ -3,7 +3,12 @@ import { AppProps } from "next/app";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import theme from "@definitions/chakra/theme";
 import Head from "next/head";
+import Script from "next/script";
 import "@styles/global.css";
+
+<Script>
+  {`!function(c,h,i,m,p){((m = c.createElement(h)), (p = c.getElementsByTagName(h)[0]), (m.async = 1), (m.src = i), p.parentNode.insertBefore(m, p))}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/deedd1b1b98a7879df886f5b7/a07879bb0f34048abd28f405f.js");`}
+</Script>;
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -11,8 +16,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <Head>
         <title>The Power Belt</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        {/* @ts-igone */}
-        {/* <script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '143103921244055'); fbq('track', 'PageView');</script><noscript> <img height="1" width="1" src="https://www.facebook.com/tr?id=143103921244055&ev=PageView&noscript=1"/></noscript> */}
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://app.snipcart.com" />

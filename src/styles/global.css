@@ -8,7 +8,7 @@ body {
         "Noto Color Emoji";
 } */
 
-.snipcart > * {
+/* .snipcart > * {
     font-family: 'Poppins' !important;
 }
 
@@ -22,5 +22,15 @@ body {
 
 .snipcart-cart__footer {
     border-top: var(--chakra-colors-gray-100);
+} */
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+  
+.sticky + .content {
+    padding-top: 100px
 }
 
