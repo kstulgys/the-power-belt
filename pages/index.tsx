@@ -377,7 +377,7 @@ function Navigation() {
                   id="currencies"
                   // onChange={(e) => setCurrentCurrency(e.target.value)}
                   width={["75px", 24]}
-                  size={["sm"]}
+                  size="sm"
                   borderColor="gray.900"
                   rounded="md"
                   fontWeight="semibold"
