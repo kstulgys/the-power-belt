@@ -6,8 +6,8 @@ import Head from "next/head";
 import Script from "next/script";
 import "@styles/global.css";
 
-<Script>
-  {`!function(c,h,i,m,p){((m = c.createElement(h)), (p = c.getElementsByTagName(h)[0]), (m.async = 1), (m.src = i), p.parentNode.insertBefore(m, p))}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/deedd1b1b98a7879df886f5b7/a07879bb0f34048abd28f405f.js");`}
+<Script id="mcjs">
+  {`!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/deedd1b1b98a7879df886f5b7/3d5bdaf776785a0fd3d060bac.js");`}
 </Script>;
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
