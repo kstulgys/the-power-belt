@@ -3,12 +3,8 @@ import { AppProps } from "next/app";
 import { ChakraProvider, Box } from "@chakra-ui/react";
 import theme from "@definitions/chakra/theme";
 import Head from "next/head";
-import Script from "next/script";
+// import Script from "next/script";
 import "@styles/global.css";
-
-<Script id="mcjs">
-  {`!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/deedd1b1b98a7879df886f5b7/3d5bdaf776785a0fd3d060bac.js");`}
-</Script>;
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -22,6 +18,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <link rel="preconnect" href="https://cdn.snipcart.com" />
         <link rel="stylesheet" href="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.css" />
         <script async src="https://cdn.snipcart.com/themes/v3.2.0/default/snipcart.js" />
+        <script
+          id="mcjs"
+          dangerouslySetInnerHTML={{
+            __html: `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/deedd1b1b98a7879df886f5b7/3d5bdaf776785a0fd3d060bac.js");`,
+          }}
+        />
       </Head>
       <Box fontFamily="Poppins" minH="100vh" bg="gray.100">
         <div id="snipcart" data-config-modal-style="side" data-api-key={process.env.NEXT_PUBLIC_ENV_DATA_API_KEY} hidden />
