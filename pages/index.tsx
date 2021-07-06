@@ -93,7 +93,7 @@ const Home: React.FC = () => {
     <>
       <TopBar />
       <Navigation />
-      <Subscribe />
+      {/* <Subscribe /> */}
       <Heading onClick={onClick} />
       <PitchSection />
       <TrustBadgesv2 />
@@ -129,12 +129,12 @@ function OrderProduct({ orderSectionRef }) {
     <Stack height="100vh" py={32} bg="gray.100" ref={orderSectionRef}>
       <Container>
         <Stack isInline>
-          <Stack flex={1}>
+          {/* <Stack flex={1}>
             <Text>Hello</Text>
           </Stack>
           <Stack flex={1}>
             <Text>Hello</Text>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Container>
     </Stack>
@@ -146,13 +146,13 @@ function Heading({ onClick }) {
     <Stack height={["full", "calc(60vh - 5rem)"]} color="gray.900" flex={0.6} spacing={0} width="full">
       <Stack height="full" isInline alignItems="flex-end">
         <Container maxW="8xl">
-          <Stack direction={["column", "row"]} width="full" alignItems="center" justifyContent="center">
-            <Stack flex={0.5} order={[2, 1]}>
+          <Stack pt={[4, 0]} direction={["column", "row"]} width="full" alignItems="center" justifyContent="center">
+            <Stack flex={0.5} order={[2, 1]} width="full">
               <Text pb={16} fontSize={["3xl", "7xl"]} fontWeight="bold" lineHeight="none" m={0}>
                 <Box color="blue.400">#1 Pro Grade </Box>Weight Lifting Belt
               </Text>
               <Stack>
-                <Stack isInline justifyContent="space-between" alignItems="center" width="60%" spacing={4}>
+                <Stack isInline justifyContent="space-between" alignItems="center" width={["full", "60%"]} spacing={4}>
                   <Box>
                     <Text color="gray.400" fontSize="3xl" fontWeight="semibold" textDecor="line-through" m={0}>
                       $299
@@ -181,7 +181,7 @@ function Heading({ onClick }) {
                     </Badge>
                   </Box>
                 </Stack>
-                <Box width="60%">
+                <Box width={["full", "60%"]}>
                   <Button
                     onClick={onClick}
                     width="full"
@@ -218,18 +218,18 @@ function Heading({ onClick }) {
 function TrustBadgesv2() {
   return (
     <Container maxW="8xl">
-      <Stack spacing={32} isInline alignItems="center" justifyContent="center" py={20}>
+      <Stack spacing={[4, 32]} isInline alignItems="center" justifyContent="center">
         <Box>
-          <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={40} />
+          <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={[16, 40]} />
         </Box>
         <Box>
-          <Image src="/trust-badges/Money-back_Guarantee_Badge.svg" height={40} />
+          <Image src="/trust-badges/Money-back_Guarantee_Badge.svg" objectFit="cover" height={[16, 40]} />
         </Box>
         <Box>
-          <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={40} />
+          <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={[16, 40]} />
         </Box>
         <Box>
-          <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={40} />
+          <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={[16, 40]} />
         </Box>
       </Stack>
     </Container>
@@ -288,10 +288,10 @@ function TrustBadges() {
 function PitchSection() {
   return (
     <Container maxW="8xl">
-      <Stack height={["full", "40vh"]} isInline py={[10, 32]}>
+      <Stack height={["full", "40vh"]} isInline py={[10, 24]}>
         <Stack isInline>
           <Stack isInline flex={1}>
-            <Text lineHeight="taller" as="span" m={0} fontSize={["md"]} fontWeight={["normal"]}>
+            <Text lineHeight="taller" as="span" m={0} fontSize={["md", "2xl"]} fontWeight={["normal"]}>
               We are group of passionate weight lifters, powerlifters and software engineers and we are on the mission to provide you the best software and
               equiptment to achieve your health and strenght goals. We are working with #1 sports equptment manufacturers to provide you the best quality
               products and customer satisfaction
@@ -335,13 +335,13 @@ function Navigation() {
 
   return (
     <>
-      <Stack ref={ref} transition="all 0.3s ease-in-out" zIndex={10} spacing={0} {...headerProps}>
+      <Stack ref={ref} transition="all 0.2s ease-in-out" zIndex={10} spacing={0} {...headerProps}>
         <Container maxW="8xl">
           <Stack isInline height={[16, 20]} alignItems="center" spacing={0}>
             <Stack order={[2, 1]} flex={1} isInline justifyContent={["center", "flex-start"]}>
-              <Text m={0} fontWeight="bold" fontSize={["lg", "2xl"]}>
+              {/* <Text m={0} fontWeight="bold" fontSize={["lg", "2xl"]}>
                 #TPB
-              </Text>
+              </Text> */}
             </Stack>
             <Stack order={[1]} flex={1} display={["flex", "none"]}>
               <MenuDrawer />
@@ -430,7 +430,7 @@ function MenuDrawer() {
   return (
     <>
       <Box>
-        <Button size="xs" display={["block", "none"]} ref={btnRef} colorScheme="teal" onClick={onOpen}>
+        <Button variant="unstyled" size="xs" display={["block", "none"]} ref={btnRef} onClick={onOpen}>
           |||
         </Button>
       </Box>
