@@ -65,6 +65,19 @@ function Container({ children, maxW = "7xl" }) {
 // );
 
 const Home: React.FC = () => {
+  return (
+    <Stack width="full" py={32} spacing={0} px={4}>
+      <Text textAlign="center" fontSize="3xl" fontWeight="semibold">
+        Some great content is comming up shortly
+      </Text>
+      <Text textAlign="center">
+        Do not miss the launch, follow us on 👉{" "}
+        <Link color="blue.600" fontWeight="medium" isExternal href="https://www.facebook.com/artunden">
+          facebook
+        </Link>
+      </Text>
+    </Stack>
+  );
   const orderSectionRef = React.useRef(null);
 
   const onClick = () => {
