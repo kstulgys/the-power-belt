@@ -66,16 +66,27 @@ function Container({ children, maxW = "7xl" }) {
 
 const Home: React.FC = () => {
   return (
-    <Stack width="full" py={32} spacing={0} px={4}>
-      <Text textAlign="center" fontSize="3xl" fontWeight="semibold">
-        Great content is coming soon
-      </Text>
-      <Text textAlign="center">
-        Do not miss the launch, follow us on 👉{" "}
-        <Link color="blue.600" fontWeight="medium" isExternal href="https://www.facebook.com/artunden">
-          facebook
-        </Link>
-      </Text>
+    <Stack minH="100vh" height="full" width="full" pt={32} pb={2} spacing={0} px={4}>
+      <Stack flex={1}>
+        <Text textAlign="center" fontSize="3xl" fontWeight="semibold">
+          Great content is coming soon
+        </Text>
+        <Text textAlign="center">
+          Do not miss the launch, follow us on 👉{" "}
+          <Link color="blue.600" fontWeight="medium" isExternal href="https://www.facebook.com/artunden">
+            facebook
+          </Link>
+        </Text>
+      </Stack>
+      <Stack>
+        <Text textAlign="center">
+          Made with ❤️ by{" "}
+          <Link fontWeight="semibold" isExternal href="mailto:team@thepowerbelt.com?subject=Hi there 👋">
+            thepowerbelt
+          </Link>{" "}
+          team
+        </Text>
+      </Stack>
     </Stack>
   );
   const orderSectionRef = React.useRef(null);
