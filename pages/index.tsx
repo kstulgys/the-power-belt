@@ -68,7 +68,7 @@ const Home: React.FC = () => {
   return (
     <Stack width="full" py={32} spacing={0} px={4}>
       <Text textAlign="center" fontSize="3xl" fontWeight="semibold">
-        Some great content is coming up shortly
+        Great content is coming soon
       </Text>
       <Text textAlign="center">
         Do not miss the launch, follow us on 👉{" "}
