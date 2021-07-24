@@ -12,6 +12,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <Head>
         <title>The Power Belt</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+        <meta name="description" content="Best quality, lifetime lasting belts for weight lifters"></meta>
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
         <link rel="preconnect" href="https://app.snipcart.com" />

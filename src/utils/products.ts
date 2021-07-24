@@ -11,36 +11,58 @@ type Product = {
   sku: string;
 };
 
-// 300 => 67% => $99
-
 const productList = [
   {
     categories: ["belts"],
-    name: "Lever Buckle Powerlifting Belt",
+    name: "Powerlifting Belt",
     priceOriginal: "130",
     discountPercent: "55",
     price: "59",
     sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
-    colors: ["black", "yellow", "red"],
-    imageMain: "/images/lever-belts.png",
-    images: ["/images/lever-belts.png"],
-    description:
-      "Featuring a patented gliding lever, providing the adjustability of a prong belt with the ease and tightness of a lever belt. Ideal for sizing up or down whenever you need during training sessions and competitions.",
-  },
-  {
-    categories: ["belts"],
-    name: "Heavy duty SBD Lever Powerlifting weightlifting Belt 13mm",
-    priceOriginal: "300",
-    discountPercent: "67",
-    price: "99",
-    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
-    colors: ["black", "yellow", "red"],
-    imageMain: "/images/sbd-belts.png",
-    images: ["/images/sbd-belts.png"],
+    // colors: ["black", "yellow", "red"],
+    // imageMain: "/images/powerlift_belts/1.png",
+    images: [
+      "/images/powerlift_belts/1.png",
+      "/images/powerlift_belts/2.png",
+      "/images/powerlift_belts/3.png",
+      "/images/powerlift_belts/4.png",
+      "/images/powerlift_belts/5.png",
+    ],
     description:
       "Featuring a patented gliding lever, providing the adjustability of a prong belt with the ease and tightness of a lever belt. Ideal for sizing up or down whenever you need during training sessions and competitions.",
   },
 ];
+
+// 300 => 67% => $99
+
+// const productList = [
+//   {
+//     categories: ["belts"],
+//     name: "Lever Buckle Powerlifting Belt",
+//     priceOriginal: "130",
+//     discountPercent: "55",
+//     price: "59",
+//     sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+//     colors: ["black", "yellow", "red"],
+//     imageMain: "/images/lever-belts.png",
+//     images: ["/images/lever-belts.png"],
+//     description:
+//       "Featuring a patented gliding lever, providing the adjustability of a prong belt with the ease and tightness of a lever belt. Ideal for sizing up or down whenever you need during training sessions and competitions.",
+//   },
+//   {
+//     categories: ["belts"],
+//     name: "Heavy duty SBD Lever Powerlifting weightlifting Belt 13mm",
+//     priceOriginal: "300",
+//     discountPercent: "67",
+//     price: "99",
+//     sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
+//     colors: ["black", "yellow", "red"],
+//     imageMain: "/images/sbd-belts.png",
+//     images: ["/images/sbd-belts.png"],
+//     description:
+//       "Featuring a patented gliding lever, providing the adjustability of a prong belt with the ease and tightness of a lever belt. Ideal for sizing up or down whenever you need during training sessions and competitions.",
+//   },
+// ];
 
 // const products = [
 //     {
