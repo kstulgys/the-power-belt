@@ -1,0 +1,86 @@
+* {
+    font-family: Poppins, sans-serif !important;
+}
+
+.snipcart__font--xlarge {
+   font-size: var(--chakra-fontSizes-lg) !important;
+}
+
+.snipcart-button-primary {
+    border-radius: 0 !important;
+    background-color: #171A23 !important;
+    height: var(--chakra-sizes-14) !important;
+}
+
+.snipcart-base-button__label {
+    font-size: var(--chakra-fontSizes-md) !important;
+}
+
+.snipcart-button-icon {
+    background-color: #171A23 !important;
+    color: white !important;
+}
+
+.snipcart-button-link {
+    color: #171A23  !important;
+}
+
+.snipcart-discount-box__button:hover {
+    border: none !important;
+    box-shadow: var(--chakra-shadows-outline) !important;
+}
+
+.snipcart-summary-fees__notice {
+    padding-bottom: var(--chakra-sizes-3) !important;
+
+}
+
+.snipcart-input, .snipcart-input > input {
+    box-shadow: none !important;
+}
+
+.snipcart-input:focus, .snipcart-input:hover, .snipcart-input:active, .snipcart-input:focus-within {
+    border: none !important;
+    box-shadow: var(--chakra-shadows-outline) !important;
+}
+
+.snipcart-form__select:focus, .snipcart-form__select:hover, .snipcart-form__select:active, .snipcart-form__select:focus-within {
+    border: none !important;
+    box-shadow: var(--chakra-shadows-outline) !important;
+}
+
+.snipcart-discount-box__form {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.snipcart-summary-fees__notice {
+    display: none;
+}
+
+.snipcart-item-quantity__quantity:hover, .snipcart-item-quantity__quantity:focus, .snipcart-item-quantity__quantity:focus-within {
+    border: none !important;
+    box-shadow: var(--chakra-shadows-outline) !important;
+}
+
+.snipcart__icon {
+    color: #171A23  !important;
+}
+
+.snipcart-item-quantity__quantity .snipcart__icon {
+    color: #fff  !important;
+}
+
+.is-danger .snipcart__icon {
+    color: #fff  !important;
+}
+
+.snipcart-checkbox:hover {
+    border: none !important;
+    box-shadow: var(--chakra-shadows-outline) !important;
+}
+
+.snipcart-form__label {
+    font-size: var(--chakra-fontSizes-sm) !important;
+}
+

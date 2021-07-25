@@ -1,13 +1,9 @@
-import React, { useReducer } from "react";
+import React from "react";
 import {
   Stack,
   Box,
   Text,
   Button,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Image,
   Badge,
   Link,
@@ -20,6 +16,11 @@ import {
   AccordionIcon,
   Radio,
   ButtonProps,
+  List,
+  ListItem,
+  ListIcon,
+  OrderedList,
+  UnorderedList,
 } from "@chakra-ui/react";
 import { products } from "src/utils/products";
 import { Footer } from "@components/footer";
@@ -151,8 +152,8 @@ export function PowerliftingBelt13mm() {
             <Accordion allowToggle>
               <AccordionItem borderColor="gray.900">
                 <h2>
-                  <AccordionButton>
-                    <Stack isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
+                  <AccordionButton py={3}>
+                    <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
                       <Text m={0}>Belt</Text>
                       <Box boxSize={6} rounded="full" bg={beltColors[colorIndex].color} borderWidth="1px" borderColor="gray.900" />
                     </Stack>
@@ -185,8 +186,8 @@ export function PowerliftingBelt13mm() {
               </AccordionItem>
               <AccordionItem borderColor="gray.900">
                 <h2>
-                  <AccordionButton>
-                    <Stack isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
+                  <AccordionButton py={3}>
+                    <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
                       <Text m={0}>Stitched</Text>
                       <Box boxSize={6} rounded="full" bg={beltColors[stitchedIndex].color} borderWidth="1px" borderColor="gray.900" />
                     </Stack>
@@ -318,15 +319,34 @@ export function PowerliftingBelt13mm() {
 
 function ProductDescription() {
   return (
-    <Stack spacing={0}>
+    <Stack spacing={4} pt={[0, 10]}>
+      <Box>
+        <Text fontWeight="semibold" m={0}>
+          You love cycling, but long commutes and rough roads can be a literal pain in the butt.
+        </Text>
+      </Box>
+
       <Box>
         <Text m={0}>
-          You love cycling, but long commutes and rough roads can be a literal pain in the butt. The solution? Our 3D Gel Bike Seat Cushion. Simply stretch it
-          over your bike seat before your next commute or cycling tour. Then enjoy cycling in comfort, without the pain of a hard, uncomfortable bike saddle.
-          The 3D Gel Bike Seat Cushion will save your butt. 3D contoured gel seat makes for a comfortable ride Stretches over any bike seat Use for daily
-          commutes or long cycle tours Reflective tab on the back keeps you visible and safe Unisex - perfect for male and female cyclists Machine washable Due
-          to popular demand, this product takes between 20 and 30 days to arrive.
+          The solution? Our 3D Gel Bike Seat Cushion. Simply stretch it over your bike seat before your next commute or cycling tour. Then enjoy cycling in
+          comfort, without the pain of a hard, uncomfortable bike saddle. The 3D Gel Bike Seat Cushion will save your butt.
         </Text>
+      </Box>
+
+      <Box>
+        <Text m={0}>
+          <UnorderedList>
+            <ListItem>3D contoured gel seat makes for a comfortable ride </ListItem>
+            <ListItem>Stretches over any bike seat </ListItem>
+            <ListItem>Use for daily commutes or long cycle tours </ListItem>
+            <ListItem>Reflective tab on the back keeps you visible and safe </ListItem>
+            <ListItem>Unisex - perfect for male and female cyclists </ListItem>
+            <ListItem>Machine washable </ListItem>
+          </UnorderedList>
+        </Text>
+      </Box>
+      <Box>
+        <Text>Due to popular demand, this product takes between 20 and 30 days to arrive.</Text>
       </Box>
     </Stack>
   );
@@ -364,16 +384,22 @@ function SelectionSection({ title, children }) {
 }
 
 const MotionBox = motion<ButtonProps>(Button);
-function AddToCartButton() {
-  const variants = {
-    visible: {
-      x: [0, -50, 50, -50, 50, 0],
-      transition: { delay: 0, repeatDelay: 10, loop: Infinity, duration: 0.5 },
-    },
-  };
+const variants = {
+  visible: {
+    x: [0, -50, 50, -50, 50, 0],
+    transition: { delay: 10, repeatDelay: 10, loop: Infinity, duration: 0.5 },
+  },
+};
 
+function AddToCartButton() {
   return (
     <MotionBox
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      touchAction="manipulation"
+      _hover={{
+        boxShadow: "outline",
+      }}
       variants={variants}
       animate="visible"
       bg="gray.900"
@@ -381,12 +407,14 @@ function AddToCartButton() {
       rounded="none"
       color="white"
       width="full"
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      touchAction="manipulation"
-      _hover={{
-        boxShadow: "outline",
-      }}
+      // snipcart
+      className="snipcart-add-item"
+      data-item-id="1"
+      data-item-price="139.00"
+      data-item-url="/product/powerlifting-belt-13mm"
+      data-item-description="High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh."
+      data-item-image={products[0].images[0]}
+      data-item-name="Powerlifting Belt 13mm"
     >
       Add to Cart
     </MotionBox>

@@ -5,9 +5,9 @@ import { Layout } from "@components/layout";
 export default function AboutPage() {
   return (
     <Layout>
-      <Stack maxW="3xl" width="full" px={4} pt={20}>
+      <Stack maxW="3xl" width="full" px={4} py={[10, 20]}>
         <Box>
-          <Text mb={10} textAlign="center" fontSize="6xl" fontWeight="bold">
+          <Text mb={[5, 10]} textAlign="center" fontSize={["3xl", "6xl"]} fontWeight="bold">
             About us
           </Text>
         </Box>

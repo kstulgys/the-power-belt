@@ -1,10 +1,16 @@
 import React from "react";
-import { Text, Stack } from "@chakra-ui/react";
+import { Text, Stack, Box } from "@chakra-ui/react";
+import { Layout } from "@components/layout";
 
 export default function TermsOfServicePolicy() {
   return (
-    <Stack>
-      <Stack mx="auto" maxW="3xl" width="full" px={4}>
+    <Layout>
+      <Stack mx="auto" maxW="3xl" width="full" px={4} pt={10}>
+        <Box>
+          <Text mb={[5, 10]} textAlign="center" fontSize={["3xl", "6xl"]} fontWeight="bold">
+            Terms of service
+          </Text>
+        </Box>
         <div>
           <strong>OVERVIEW</strong> <br /> This website is operated by popup-store-demo. Throughout the site, the terms “we”, “us” and “our” refer to
           popup-store-demo. popup-store-demo offers this website, including all information, tools and services available from this site to you, the user,
@@ -142,6 +148,6 @@ export default function TermsOfServicePolicy() {
           <strong>SECTION 20 - CONTACT INFORMATION</strong> <br /> Questions about the Terms of Service should be sent to us at karolis.stulgys@gmail.com.
         </div>
       </Stack>
-    </Stack>
+    </Layout>
   );
 }

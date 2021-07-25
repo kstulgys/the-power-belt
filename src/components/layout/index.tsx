@@ -19,10 +19,11 @@ import {
   Center,
 } from "@chakra-ui/react";
 import React from "react";
-import { FiShoppingCart, FiGlobe, FiFacebook, FiMail } from "react-icons/fi";
+import { FiMail, FiMenu } from "react-icons/fi";
 import { FaFacebook } from "react-icons/fa";
-import NextLink from "next/link";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Footer } from "@components/footer";
+import NextLink from "next/link";
 
 export function Layout({ children }) {
   return (
@@ -33,7 +34,9 @@ export function Layout({ children }) {
           <Navigation />
         </Stack>
         <Center flexDir="column">{children}</Center>
-        <TrustBadges />
+        <Container maxW="3xl">
+          <TrustBadges />
+        </Container>
         <Footer />
       </Box>
     </>
@@ -42,7 +45,7 @@ export function Layout({ children }) {
 
 function Container({ children, maxW = "7xl" }) {
   return (
-    <Stack maxW={maxW} px="4" mx="auto" width="full">
+    <Stack maxW={maxW} px={4} mx="auto" width="full">
       {children}
     </Stack>
   );
@@ -50,18 +53,18 @@ function Container({ children, maxW = "7xl" }) {
 
 function TrustBadges() {
   return (
-    <Stack py={[8, 16]} spacing={[4, 32]} isInline alignItems="center" justifyContent={["space-between", "center"]} px={4}>
+    <Stack py={[6, 12]} isInline alignItems="center" justifyContent={["space-between"]} px={4}>
       <Box>
-        <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={[16, 32]} />
+        <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={[16, 28]} />
       </Box>
       <Box>
-        <Image src="/trust-badges/Money-back_Guarantee_Badge.svg" objectFit="cover" height={[16, 32]} />
+        <Image src="/trust-badges/Money-back_Guarantee_Badge.svg" objectFit="cover" height={[16, 28]} />
       </Box>
       <Box>
-        <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={[16, 32]} />
+        <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={[16, 28]} />
       </Box>
       <Box>
-        <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={[16, 32]} />
+        <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={[16, 28]} />
       </Box>
     </Stack>
   );
@@ -154,61 +157,42 @@ function Navigation() {
             <Stack display={["none", "flex"]} order={[0, 2]} flex={1} isInline justifyContent="center" spacing={6}>
               <Box>
                 <NextLink href="/" passHref>
-                  <Link>Home</Link>
+                  <Link _hover={{}}>Home</Link>
                 </NextLink>
               </Box>
               <Box>
                 <NextLink href="/about" passHref>
-                  <Link>About Us</Link>
+                  <Link _hover={{}}>About Us</Link>
                 </NextLink>
               </Box>
               <Box>
                 <NextLink href="/faq" passHref>
-                  <Link>FAQ</Link>
+                  <Link _hover={{}}>FAQ</Link>
                 </NextLink>
               </Box>
               <Box>
                 <NextLink href="/contact" passHref>
-                  <Link>Contact</Link>
+                  <Link _hover={{}}>Contact</Link>
                 </NextLink>
               </Box>
             </Stack>
             <Stack order={[3]} spacing={[0, 5]} flex={1} isInline justifyContent="flex-end" alignItems="center">
-              <Box order={[2]} pl={[0, 5]}>
+              <Box order={[2]}>
                 <Button variant="unstyled" className="snipcart-checkout" size="sm">
-                  <Icon as={FiShoppingCart} fontSize={["xl", "2xl"]} />
+                  <Icon as={HiOutlineShoppingBag} fontSize={["2xl"]} />
                 </Button>
               </Box>
-              {/* <Box>
-                <Button variant="unstyled" className="snipcart-items-count">
-                  <Icon as={FiShoppingCart} fontSize="2xl" />
-                </Button>
-              </Box> */}
 
               <Box order={[1]}>
                 <Select
-                  // pr={0}\
-                  mr={["-3"]}
                   ref={selectRef}
                   // value={currentCurrency}
                   id="currencies"
                   // onChange={(e) => setCurrentCurrency(e.target.value)}
                   width={["80px", "85px"]}
-                  // size="sm"
-                  // borderColor="gray.900"
                   border="none"
                   rounded="md"
                   fontWeight="semibold"
-                  // _hover={{
-                  //   boxShadow: "#60A5FA 0px 0px 0px 4px",
-                  //   cursor: "pointer",
-                  // }}
-                  // _active={{
-                  //   boxShadow: "#60A5FA 0px 0px 0px 4px",
-                  // }}
-                  // _visited={{
-                  //   boxShadow: "#60A5FA 0px 0px 0px 4px",
-                  // }}
                 >
                   <option value="usd">USD</option>
                   <option value="eur">EUR</option>
@@ -219,7 +203,7 @@ function Navigation() {
           </Stack>
         </Container>
       </Stack>
-      <Box pt={isSticky ? "4rem" : 0} />
+      <Box pt={isSticky ? ["4rem", "5rem"] : 0} />
     </>
   );
 }
@@ -231,25 +215,56 @@ function MenuDrawer() {
   return (
     <>
       <Box>
-        <Button variant="unstyled" size="xs" display={["block", "none"]} ref={btnRef} onClick={onOpen}>
-          |||
+        <Button variant="unstyled" display={["block", "none"]} ref={btnRef} onClick={onOpen}>
+          <Icon as={FiMenu} fontSize="2xl" />
         </Button>
       </Box>
       <Drawer isOpen={isOpen} placement="left" onClose={onClose} finalFocusRef={btnRef}>
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg="gray.100">
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader>Menu</DrawerHeader>
 
-          <DrawerBody>
-            <Input placeholder="Type here..." />
+          <DrawerBody fontSize="lg">
+            <Stack spacing={4}>
+              <Box>
+                <NextLink href="/" passHref>
+                  <Link _hover={{}}>Home</Link>
+                </NextLink>
+              </Box>
+              <Box>
+                <NextLink href="/about" passHref>
+                  <Link _hover={{}}>About Us</Link>
+                </NextLink>
+              </Box>
+              <Box>
+                <NextLink href="/faq" passHref>
+                  <Link _hover={{}}>FAQ</Link>
+                </NextLink>
+              </Box>
+              <Box>
+                <NextLink href="/contact" passHref>
+                  <Link _hover={{}}>Contact</Link>
+                </NextLink>
+              </Box>
+            </Stack>
+            <Stack pt={6}>
+              <Link isExternal href="mailto:team@thepowerbelt.com">
+                <Icon as={FiMail} mr={2} />
+                team@thepowerbelt.com
+              </Link>
+            </Stack>
           </DrawerBody>
 
-          <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme="blue">Save</Button>
+          <DrawerFooter bg="gray.200" h={16}>
+            <Stack isInline width="full" spacing={4}>
+              <Link isExternal href='href="mailto:team@thepowerbelt.com"'>
+                <Icon as={FiMail} fontSize="2xl" />
+              </Link>
+              <Link isExternal href="https://www.facebook.com/artunden">
+                <Icon as={FaFacebook} fontSize="2xl" />
+              </Link>
+            </Stack>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
