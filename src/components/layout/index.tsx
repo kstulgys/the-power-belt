@@ -33,6 +33,7 @@ export function Layout({ children }) {
           <Navigation />
         </Stack>
         <Center flexDir="column">{children}</Center>
+        <TrustBadges />
         <Footer />
       </Box>
     </>
@@ -43,6 +44,25 @@ function Container({ children, maxW = "7xl" }) {
   return (
     <Stack maxW={maxW} px="4" mx="auto" width="full">
       {children}
+    </Stack>
+  );
+}
+
+function TrustBadges() {
+  return (
+    <Stack py={[8, 16]} spacing={[4, 32]} isInline alignItems="center" justifyContent={["space-between", "center"]} px={4}>
+      <Box>
+        <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={[16, 32]} />
+      </Box>
+      <Box>
+        <Image src="/trust-badges/Money-back_Guarantee_Badge.svg" objectFit="cover" height={[16, 32]} />
+      </Box>
+      <Box>
+        <Image src="/trust-badges/Secure_Payment_Badge.svg" objectFit="cover" height={[16, 32]} />
+      </Box>
+      <Box>
+        <Image src="/trust-badges/Premium_Quality_Badge.svg" objectFit="cover" height={[16, 32]} />
+      </Box>
     </Stack>
   );
 }
@@ -117,11 +137,11 @@ function Navigation() {
                 <Link _hover={{}}>
                   <Stack isInline spacing={[0, 3]} alignItems="center">
                     <Box>
-                      <Image src="/logo/logo.svg" width={[12, 16]} />
+                      <Image src="/logo/logo.svg" width={[12, 12]} />
                     </Box>
                     <Box display={["none", "block"]}>
-                      <Text fontSize="lg" fontWeight="bold" m={0}>
-                        The Power Belt
+                      <Text fontSize="3xl" m={0} fontWeight="bold">
+                        ThePowerBelt
                       </Text>
                     </Box>
                   </Stack>
