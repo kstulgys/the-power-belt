@@ -232,21 +232,16 @@ function postCurrency(currency) {
 }
 
 function CurrencySelector() {
-  const snap = useSnapshot(state);
   const [currentCurrency, setCurrentCurrency] = React.useState(null);
-  const router = useRouter();
 
   React.useEffect(() => {
-    document.addEventListener("snipcart.ready", setIsSnipcartLoaded);
+    const updateCurrency = () => changeCurrency(fetchCurrency());
+    document.addEventListener("snipcart.ready", updateCurrency);
+    updateCurrency();
   }, []);
 
-  React.useEffect(() => {
-    if (!snap.isSnipcart) return;
-    changeCurrency(fetchCurrency());
-  }, [snap.isSnipcart]);
-
   const changeCurrency = (currency) => {
-    if (!snap.isSnipcart) return;
+    if (!window?.Snipcart) return;
     const updatedCurrency = postCurrency(currency);
     window.Snipcart.api.session.setCurrency(updatedCurrency);
     setCurrentCurrency(updatedCurrency);
