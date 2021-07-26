@@ -46,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         /> */}
       </Head>
       <Box fontFamily="Poppins" minH="100vh" bg="gray.100">
-        <div id="snipcart" data-config-modal-style="side" data-api-key={process.env.NEXT_PUBLIC_ENV_DATA_API_KEY} hidden />
+        <div id="snipcart" data-config-modal-style="side" data-api-key={process.env.NEXT_PUBLIC_ENV_DATA_API_KEY} hidden data-currency="usd" />
         <Component {...pageProps} />
       </Box>
     </ChakraProvider>
