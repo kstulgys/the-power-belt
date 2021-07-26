@@ -1,7 +1,19 @@
 import { proxy, useSnapshot } from "valtio";
 
-export const state = proxy({ isSnipcart: false });
+const state = proxy({ beltSize: "L", beltColor: "black", beltStitchedColor: "red" });
 
-export const setIsSnipcartLoaded = () => {
-  state.isSnipcart = true;
-};
+export function useBeltSelection() {
+  const snap = useSnapshot(state);
+  return {
+    snap,
+    setBeltColor: (color: string) => {
+      state.beltColor = color;
+    },
+    setBeltStitchedColor: (color: string) => {
+      state.beltStitchedColor = color;
+    },
+    setBeltSize: (size: string) => {
+      state.beltSize = size;
+    },
+  };
+}

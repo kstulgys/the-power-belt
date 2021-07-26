@@ -32,6 +32,7 @@ import NextImage from "next/image";
 import { motion } from "framer-motion";
 import { FaqContent } from "@components/faq";
 import NextLink from "next/link";
+import { useBeltSelection } from "store";
 declare const window: any;
 
 const beltColors = [
@@ -61,20 +62,23 @@ const beltColors = [
   { name: "fuchsia", color: "#C850AF" },
   { name: "black", color: "#0E161B" },
 ];
+
+const beltSizes = ["S", "M", "L", "XL", "2xl"];
 // s 90cm
 // m 100cm
 // L 110cm
 // xl 120cm
 // xxl 125cm
 // xxxl 130cm
+
 export function PowerliftingBelt13mm() {
   const [sizeIndex, setSizeIndex] = React.useState(2);
   const [colorIndex, setColorIndex] = React.useState(24);
   const [stitchedIndex, setStitchedIndex] = React.useState(22);
+  const { snap, setBeltColor, setBeltStitchedColor, setBeltSize } = useBeltSelection();
 
-  const sizes = ["S", "M", "L", "XL", "2xl", "3xl"];
   const product = products[0];
-  const selectionName = `${sizes[sizeIndex]}/${beltColors[colorIndex].name}/stitched:${beltColors[stitchedIndex].name}`;
+  const selectionName = `${beltSizes[sizeIndex]}/${beltColors[colorIndex].name}/stitched:${beltColors[stitchedIndex].name}`;
 
   return (
     <Stack>
@@ -101,7 +105,6 @@ export function PowerliftingBelt13mm() {
                 Powerlifting Belt 13mm
               </Link>
             </NextLink>
-            <Text></Text>
           </Box>
           <SelectionSection title="Selected">
             <Stack height={14} borderColor="gray.900" borderWidth="2px" alignItems="center" justifyContent="center">
@@ -128,18 +131,18 @@ export function PowerliftingBelt13mm() {
             }
           >
             <Wrap>
-              {sizes.map((size, index) => {
+              {beltSizes.map((size, index) => {
                 return (
                   <WrapItem key={size}>
                     <Button
                       borderColor="gray.900"
                       borderWidth="2px"
-                      bg={sizeIndex === index ? "gray.900" : "white"}
-                      color={sizeIndex === index ? "white" : "gray.900"}
+                      bg={snap.beltSize === size ? "gray.900" : "white"}
+                      color={snap.beltSize === size ? "white" : "gray.900"}
                       boxSize={12}
                       rounded="full"
                       _hover={{}}
-                      onClick={() => setSizeIndex(index)}
+                      onClick={() => setBeltSize(size)}
                     >
                       {size}
                     </Button>
@@ -294,7 +297,7 @@ function BulkOrder() {
 const discounts = [
   { quantity: 1, price: "129.00", prevPrice: "129.00", saveText: null },
   { quantity: 2, price: "232.20", prevPrice: "258.00", saveText: "save 10%" },
-  { quantity: 5, price: "477.30", prevPrice: "645.00", saveText: "save 26% (5th is FREE)" },
+  { quantity: 5, price: "477.30", prevPrice: "645.00", saveText: "save 26%" },
 ];
 
 function ProductDescription() {
@@ -371,7 +374,21 @@ const variants = {
   },
 };
 
+const colors = beltColors.reduce((acc, { name }, index) => {
+  if (!acc) return acc.concat(`${name}|`);
+  if (beltColors.length - 1 === index) return acc.concat(name);
+  return acc.concat(`${name}|`);
+}, "");
+
+const sizes = beltSizes.reduce((acc, size, index) => {
+  if (!acc) return acc.concat(`${size}|`);
+  if (beltSizes.length - 1 === index) return acc.concat(size);
+  return acc.concat(`${size}|`);
+}, "");
+
 function AddToCartButton() {
+  const { snap, setBeltColor, setBeltStitchedColor, setBeltSize } = useBeltSelection();
+
   return (
     <MotionBox
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -396,6 +413,15 @@ function AddToCartButton() {
       data-item-description="Lifetime lasting, best quality, 13mm powerlifting belt"
       data-item-image={products[0].images[0]}
       data-item-name="Powerlifting Belt 13mm"
+      data-item-custom1-name="Size"
+      data-item-custom1-options={sizes}
+      data-item-custom1-value={snap.beltSize}
+      data-item-custom2-name="Belt color"
+      data-item-custom2-options={colors}
+      data-item-custom2-value={snap.beltColor}
+      data-item-custom3-name="Belt stitched"
+      data-item-custom3-options={colors}
+      data-item-custom3-value={snap.beltStitchedColor}
     >
       Add to Cart
     </MotionBox>

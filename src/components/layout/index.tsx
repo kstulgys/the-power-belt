@@ -232,7 +232,7 @@ function postCurrency(currency) {
 }
 
 function CurrencySelector() {
-  const [currentCurrency, setCurrentCurrency] = React.useState(null);
+  const [currentCurrency, setCurrentCurrency] = React.useState("");
 
   React.useEffect(() => {
     const updateCurrency = () => changeCurrency(fetchCurrency());
@@ -252,7 +252,7 @@ function CurrencySelector() {
   return (
     <Select
       value={currentCurrency}
-      onChange={(e) => changeCurrency(e.target.value)}
+      onChange={({ target: { value } }) => changeCurrency(value)}
       id="currencies"
       width={["85px"]}
       border="none"
