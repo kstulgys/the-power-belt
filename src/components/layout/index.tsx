@@ -25,10 +25,6 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Footer } from "@components/footer";
 import NextLink from "next/link";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { setIsSnipcartLoaded, state } from "store";
-import { useSnapshot } from "valtio";
-
 declare const window: any;
 
 export function Layout({ children, title = "", description = "" }) {
