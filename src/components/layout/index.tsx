@@ -210,7 +210,7 @@ function CurrencySelector() {
 
   React.useEffect(() => {
     const setCurrency = () => {
-      if (!window?.Snipcart) {
+      if (window?.Snipcart) {
         const state = window.Snipcart.store.getState();
         const currency = state.cart.currency;
         setCurrentCurrency(currency);
