@@ -83,7 +83,7 @@ function Heading({ onShopNowClick }) {
 
 function ListBelts() {
   return (
-    <Stack>
+    <Stack spacing={[0, 16]}>
       <BeltsListHeader />
       <PowerliftingBelt13mm />
     </Stack>

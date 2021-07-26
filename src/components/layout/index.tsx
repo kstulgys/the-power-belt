@@ -24,10 +24,19 @@ import { FaFacebook } from "react-icons/fa";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Footer } from "@components/footer";
 import NextLink from "next/link";
+import Head from "next/head";
+import { useRouter } from "next/router";
+declare const window: any;
 
-export function Layout({ children }) {
+export function Layout({ children, title = "", description = "" }) {
   return (
     <>
+      <Head>
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+      </Head>
       <Box>
         <Stack spacing={0} width="full">
           <TopBar />
@@ -102,7 +111,6 @@ function TopBar() {
 
 function Navigation() {
   const scRef = React.useRef<HTMLDivElement>(null);
-  const selectRef = React.useRef<HTMLSelectElement>(null);
   const [_, rerender] = React.useReducer((state, _) => state + 1, 0);
   // const [currentCurrency, setCurrentCurrency] = React.useState("usd");
   const ref = React.useRef(null);
@@ -184,20 +192,7 @@ function Navigation() {
               </Box>
 
               <Box order={[1]}>
-                <Select
-                  ref={selectRef}
-                  // value={currentCurrency}
-                  id="currencies"
-                  // onChange={(e) => setCurrentCurrency(e.target.value)}
-                  width={["80px", "85px"]}
-                  border="none"
-                  rounded="md"
-                  fontWeight="semibold"
-                >
-                  <option value="usd">USD</option>
-                  <option value="eur">EUR</option>
-                  <option value="aud">AUD</option>
-                </Select>
+                <CurrencySelector />
               </Box>
             </Stack>
           </Stack>
@@ -205,6 +200,56 @@ function Navigation() {
       </Stack>
       <Box pt={isSticky ? ["4rem", "5rem"] : 0} />
     </>
+  );
+}
+
+function CurrencySelector() {
+  const [currentCurrency, setCurrentCurrency] = React.useState(null);
+  const [snipcartIsLoaded, setIsLoaded] = React.useState(false);
+  const router = useRouter();
+
+  React.useEffect(() => {
+    const setCurrency = () => {
+      if (!window?.Snipcart) {
+        const state = window.Snipcart.store.getState();
+        const currency = state.cart.currency;
+        setCurrentCurrency(currency);
+      }
+    };
+    setCurrency();
+    const handle = () => {
+      console.log("snipcart.ready");
+      setCurrency();
+      setIsLoaded(true);
+    };
+    document.addEventListener("snipcart.ready", handle);
+    return () => {
+      document.removeEventListener("snipcart.ready", handle);
+    };
+  }, [router.route]);
+
+  const changeCurrency = (currency) => {
+    window.Snipcart.api.session.setCurrency(currency);
+    setCurrentCurrency(currency);
+  };
+
+  if (!currentCurrency) return null;
+
+  return (
+    <Select
+      value={currentCurrency}
+      onChange={(e) => changeCurrency(e.target.value)}
+      id="currencies"
+      width={["85px"]}
+      border="none"
+      rounded="md"
+      fontWeight="semibold"
+    >
+      <option value="usd">USD</option>
+      <option value="cad">CAD</option>
+      <option value="aud">AUD</option>
+      <option value="eur">EUR</option>
+    </Select>
   );
 }
 

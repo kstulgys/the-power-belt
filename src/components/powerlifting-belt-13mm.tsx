@@ -238,66 +238,7 @@ export function PowerliftingBelt13mm() {
               </Stack>
             }
           >
-            <Stack>
-              <Stack isInline alignItems="center">
-                <Radio size="lg" name="1" colorScheme="blue" defaultChecked>
-                  <Stack isInline fontSize="md">
-                    <Text m={0}>Buy 1:</Text>
-                    <Text m={0} fontWeight="semibold">
-                      $139.00
-                    </Text>
-                  </Stack>
-                </Radio>
-              </Stack>
-              <Stack isInline alignItems="center">
-                <Radio size="lg" name="2" colorScheme="blue">
-                  <Stack isInline fontSize="md">
-                    <Box>
-                      <Text m={0}>Buy 2:</Text>
-                    </Box>
-                    <Box>
-                      <Text m={0} fontWeight="semibold">
-                        $200.00
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text m={0} fontWeight="semibold" textDecor="line-through" color="gray.500">
-                        $139.00
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Badge mt="-3px" fontSize="sm" color="white" bg="gray.900">
-                        save 10%
-                      </Badge>
-                    </Box>
-                  </Stack>
-                </Radio>
-              </Stack>
-              <Stack isInline alignItems="center">
-                <Radio size="lg" name="2" colorScheme="blue">
-                  <Stack isInline fontSize="md">
-                    <Box>
-                      <Text m={0}>Buy 5:</Text>
-                    </Box>
-                    <Box>
-                      <Text m={0} fontWeight="semibold">
-                        $200.00
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text m={0} fontWeight="semibold" textDecor="line-through" color="gray.500">
-                        $139.00
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Badge mt="-3px" fontSize="sm" color="white" bg="gray.900">
-                        save 15%
-                      </Badge>
-                    </Box>
-                  </Stack>
-                </Radio>
-              </Stack>
-            </Stack>
+            <BulkOrder />
           </SelectionSection>
           <Stack spacing={4}>
             <AddToCartButton />
@@ -316,6 +257,45 @@ export function PowerliftingBelt13mm() {
     </Stack>
   );
 }
+
+function BulkOrder() {
+  return (
+    <Stack spacing={3}>
+      {discounts.map(({ quantity, price, prevPrice, saveText }) => {
+        return (
+          <Stack key={quantity} isInline alignItems="center">
+            <Stack isInline fontSize="md">
+              <Box>
+                <Text m={0}>Buy {quantity}:</Text>
+              </Box>
+              <Box>
+                <Text m={0} fontWeight="semibold">
+                  ${price}
+                </Text>
+              </Box>
+              <Box>
+                <Text m={0} fontWeight="semibold" textDecor="line-through" color="gray.500">
+                  ${prevPrice}
+                </Text>
+              </Box>
+              <Box>
+                <Badge mt="-3px" fontSize="sm" color="white" bg="gray.900" px={2}>
+                  {saveText}
+                </Badge>
+              </Box>
+            </Stack>
+          </Stack>
+        );
+      })}
+    </Stack>
+  );
+}
+
+const discounts = [
+  { quantity: 1, price: "129.00", prevPrice: "129.00", saveText: null },
+  { quantity: 2, price: "232.20", prevPrice: "258.00", saveText: "save 10%" },
+  { quantity: 5, price: "477.30", prevPrice: "645.00", saveText: "save 26% (5th is FREE)" },
+];
 
 function ProductDescription() {
   return (
@@ -407,12 +387,13 @@ function AddToCartButton() {
       rounded="none"
       color="white"
       width="full"
-      // snipcart
+      // snipcart stuff
       className="snipcart-add-item"
       data-item-id="1"
-      data-item-price="139.00"
+      // eslint-disable-next-line prettier/prettier
+      data-item-price="{&quot;usd&quot;: 129.00, &quot;cad&quot;: 162.00, &quot;eur&quot;: 109.00, &quot;aud&quot;: 175.00}"
       data-item-url="/product/powerlifting-belt-13mm"
-      data-item-description="High-quality replica of The Starry Night by the Dutch post-impressionist painter Vincent van Gogh."
+      data-item-description="Lifetime lasting, best quality, 13mm powerlifting belt"
       data-item-image={products[0].images[0]}
       data-item-name="Powerlifting Belt 13mm"
     >
