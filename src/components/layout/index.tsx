@@ -26,6 +26,9 @@ import { Footer } from "@components/footer";
 import NextLink from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { setIsSnipcartLoaded, state } from "store";
+import { useSnapshot } from "valtio";
+
 declare const window: any;
 
 export function Layout({ children, title = "", description = "" }) {
@@ -203,34 +206,50 @@ function Navigation() {
   );
 }
 
+function fetchCurrency() {
+  try {
+    const defaultCurrency = window.localStorage.getItem("currency");
+    if (defaultCurrency) {
+      return defaultCurrency;
+    } else {
+      window.localStorage.setItem("currency", "usd");
+      return "usd";
+    }
+  } catch ({ error }) {
+    console.log({ error });
+    return "usd";
+  }
+}
+
+function postCurrency(currency) {
+  try {
+    window.localStorage.setItem("currency", currency);
+    return currency;
+  } catch ({ error }) {
+    console.log({ error });
+    return "usd";
+  }
+}
+
 function CurrencySelector() {
+  const snap = useSnapshot(state);
   const [currentCurrency, setCurrentCurrency] = React.useState(null);
-  const [snipcartIsLoaded, setIsLoaded] = React.useState(false);
   const router = useRouter();
 
   React.useEffect(() => {
-    const setCurrency = () => {
-      if (window?.Snipcart) {
-        const state = window.Snipcart.store.getState();
-        const currency = state.cart.currency;
-        setCurrentCurrency(currency);
-      }
-    };
-    setCurrency();
-    const handle = () => {
-      console.log("snipcart.ready");
-      setCurrency();
-      setIsLoaded(true);
-    };
-    document.addEventListener("snipcart.ready", handle);
-    return () => {
-      document.removeEventListener("snipcart.ready", handle);
-    };
-  }, [router.route]);
+    document.addEventListener("snipcart.ready", setIsSnipcartLoaded);
+  }, []);
+
+  React.useEffect(() => {
+    if (!snap.isSnipcart) return;
+    changeCurrency(fetchCurrency());
+  }, [snap.isSnipcart]);
 
   const changeCurrency = (currency) => {
-    window.Snipcart.api.session.setCurrency(currency);
-    setCurrentCurrency(currency);
+    if (!snap.isSnipcart) return;
+    const updatedCurrency = postCurrency(currency);
+    window.Snipcart.api.session.setCurrency(updatedCurrency);
+    setCurrentCurrency(updatedCurrency);
   };
 
   if (!currentCurrency) return null;
