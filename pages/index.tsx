@@ -35,7 +35,7 @@ export default function Home() {
       <Heading onShopNowClick={onShopNowClick} />
       <Container>
         <Stack ref={productsDivRef}>
-          <Box pb={[6, 12]}>
+          <Box pb={[6, 12]} display={["none", "block"]}>
             <Text m={0} textAlign="center" fontSize="3xl" fontWeight="bold">
               Belts
             </Text>
@@ -49,9 +49,9 @@ export default function Home() {
 
 function Heading({ onShopNowClick }) {
   return (
-    <Stack minH={["full", "60vh"]} isInline height="full" justifyContent="center" alignItems="center" pb={12}>
-      <Box pt={[10, 0]} fontSize={["3xl", "6xl"]} fontWeight="bold" maxW="lg">
-        <Text as="h1" textAlign="center" m={0} lineHeight="shorter" fontWeight="bold">
+    <Stack height={["full", "60vh"]} isInline justifyContent="center" alignItems="center" pb={[12]} position="relative" width="full">
+      <Stack spacing={0} alignItems="center" pt={[10, 0]} fontWeight="bold" maxW={["lg"]} zIndex={2} px={4}>
+        <Text as="h1" textAlign="center" m={0} lineHeight="shorter" fontWeight="bold" fontSize={["4xl", "6xl"]}>
           Empowering Weight lifters
         </Text>
         <Text as="h2" textAlign="center" m={0} fontSize="lg" fontWeight="lighter">
@@ -73,7 +73,7 @@ function Heading({ onShopNowClick }) {
             Shop Now
           </Button>
         </Stack>
-      </Box>
+      </Stack>
     </Stack>
   );
 }

@@ -3,12 +3,12 @@ import React from "react";
 
 export function FaqContent() {
   return (
-    <Accordion allowMultiple defaultIndex={[0]}>
+    <Accordion allowMultiple defaultIndex={[0]} width="full">
       {faqList.map(({ title, content }) => (
         <AccordionItem key={title} bg="gray.200">
           <h2>
             <AccordionButton py={4}>
-              <Box flex="1" textAlign="left" fontWeight="semibold" fontSize="md">
+              <Box flex="1" textAlign="left" fontSize="md">
                 {title}
               </Box>
               <AccordionIcon />

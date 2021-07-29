@@ -40,6 +40,9 @@ export function Layout({ children, title = "", description = "" }) {
         <Stack spacing={0} width="full">
           <TopBar />
           <Navigation />
+          {/* <Box filter="grayscale(100%)" zIndex={1} top={0} left={0} h={["60vh"]} position="absolute" objectPosition="250px 125px">
+            <Image pt="7.5rem" src="/images/landing.jpg" width="full" objectFit="cover" filter="blur(5px)" height="full" />
+          </Box> */}
         </Stack>
         <Center flexDir="column">{children}</Center>
         <Container maxW="3xl">
@@ -61,7 +64,7 @@ function Container({ children, maxW = "7xl" }) {
 
 function TrustBadges() {
   return (
-    <Stack py={[6, 12]} isInline alignItems="center" justifyContent={["space-between"]} px={4}>
+    <Stack py={[8, 16]} isInline alignItems="center" justifyContent={["space-between"]}>
       <Box>
         <Image src="/trust-badges/Fee_Shipping_Badge.svg" objectFit="cover" height={[16, 28]} />
       </Box>
@@ -80,7 +83,7 @@ function TrustBadges() {
 
 function TopBar() {
   return (
-    <Stack height={10} bg="gray.900" isInline alignItems="center" spacing={0}>
+    <Stack height={10} bg="gray.900" isInline alignItems="center" spacing={0} zIndex={2}>
       <Container>
         <Stack isInline alignItems="center" fontSize={["sm"]}>
           <Stack display={["none", "flex"]} flex={1} isInline alignItems="center" color="white">
@@ -121,6 +124,7 @@ function Navigation() {
     width: "full",
     bg: "white",
     boxShadow: "base",
+    zIndex: 3,
   };
 
   React.useLayoutEffect(() => {
@@ -139,7 +143,7 @@ function Navigation() {
 
   return (
     <>
-      <Stack ref={ref} transition="all 0.2s ease-in-out" zIndex={10} spacing={0} bg={["white", "transparent"]} boxShadow={["base", "none"]} {...headerProps}>
+      <Stack ref={ref} transition="all 0.2s ease-in-out" zIndex={10} spacing={0} bg={["white"]} boxShadow={["base", "none"]} {...headerProps}>
         <Container maxW="7xl">
           <Stack isInline height={[16, 20]} alignItems="center" spacing={0}>
             <Stack order={[2, 1]} flex={1} isInline justifyContent={["center", "flex-start"]}>
@@ -327,4 +331,4 @@ function MenuDrawer() {
   );
 }
 
-// I know Karolis was in his element in React: researching, delivering latest and greatest React tech in his work, spending free time rewriting Three.js games with React components, building web apps.
+// I know Karolis was in his element in Reactjs: researching, delivering latest and greatest Reactjs UI in his work, spending free time rewriting Three.js games with React components, building web apps.

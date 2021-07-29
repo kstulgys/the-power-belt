@@ -21,6 +21,7 @@ import {
   ListIcon,
   OrderedList,
   UnorderedList,
+  Icon,
 } from "@chakra-ui/react";
 import { products } from "src/utils/products";
 import { Footer } from "@components/footer";
@@ -33,6 +34,8 @@ import { motion } from "framer-motion";
 import { FaqContent } from "@components/faq";
 import NextLink from "next/link";
 import { useBeltSelection } from "store";
+import { FaCircle } from "react-icons/fa";
+
 declare const window: any;
 
 const beltColors = [
@@ -78,7 +81,7 @@ export function PowerliftingBelt13mm() {
   const { snap, setBeltColor, setBeltStitchedColor, setBeltSize } = useBeltSelection();
 
   const product = products[0];
-  const selectionName = `${beltSizes[sizeIndex]}/${beltColors[colorIndex].name}/stitched:${beltColors[stitchedIndex].name}`;
+  const selectionName = `${snap.beltSize}/${snap.beltColor}/stitched:${snap.beltStitchedColor}`;
 
   return (
     <Stack>
@@ -169,18 +172,13 @@ export function PowerliftingBelt13mm() {
                       return (
                         <WrapItem
                           key={color}
-                          boxShadow={colorIndex === index ? "outline" : "none"}
+                          boxShadow={snap.beltColor === name ? "outline" : "none"}
                           rounded="full"
                           _hover={{
                             boxShadow: "outline",
                           }}
-                          borderColor="gray.200"
-                          borderWidth="1px"
-                          // p={0.25}
                         >
-                          <Button variant="unstyled" boxSize={8} rounded="full" _hover={{}} _active={{}} p={0.5} onClick={() => setColorIndex(index)}>
-                            <Box bg={color} width="full" height="full" rounded="full" />
-                          </Button>
+                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltColor(name)} _hover={{}} />
                         </WrapItem>
                       );
                     })}
@@ -201,20 +199,15 @@ export function PowerliftingBelt13mm() {
                   <Wrap>
                     {beltColors.map(({ name, color }, index) => {
                       return (
-                        <WrapItem key={color}>
-                          <Button
-                            variant="outline"
-                            borderColor={color}
-                            borderWidth="3px"
-                            boxSize={10}
-                            rounded="full"
-                            _hover={{}}
-                            _active={{}}
-                            p={stitchedIndex === index ? 1 : 0}
-                            onClick={() => setStitchedIndex(index)}
-                          >
-                            <Box bg={color} height="full" width="full" rounded="full" />
-                          </Button>
+                        <WrapItem
+                          key={color}
+                          boxShadow={snap.beltStitchedColor === name ? "outline" : "none"}
+                          rounded="full"
+                          _hover={{
+                            boxShadow: "outline",
+                          }}
+                        >
+                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltStitchedColor(name)} _hover={{}} />
                         </WrapItem>
                       );
                     })}
@@ -246,16 +239,17 @@ export function PowerliftingBelt13mm() {
           <Stack spacing={4}>
             <AddToCartButton />
             <SafeCheckoutLogos />
-            <Stack display={["flex", "none"]} isInline spacing={0}>
-              <ProductDescription />
-            </Stack>
             {/* <BuyNowToReceive /> */}
-            <FaqContent />
           </Stack>
         </Stack>
       </Stack>
-      <Stack display={["none", "flex"]} isInline width={["100%", "60%"]} spacing={0}>
-        <ProductDescription />
+      <Stack direction={["column", "row"]} spacing={[4, 0]} pt={2}>
+        <Stack display={["flex"]} isInline width={["100%", "60%"]} spacing={0}>
+          <ProductDescription />
+        </Stack>
+        <Stack display={["flex"]} isInline width={["100%", "40%"]} spacing={0} pl={[0, 12]}>
+          <FaqContent />
+        </Stack>
       </Stack>
     </Stack>
   );
@@ -335,8 +329,10 @@ function ProductDescription() {
           </UnorderedList>
         </Text>
       </Box>
-      <Box>
-        <Text>Due to popular demand, this product takes between 7 and 14 days to arrive.</Text>
+      <Box bg="red.100" p={4}>
+        <Text fontWeight="medium" m={0}>
+          Due to popular demand, this product takes between 7 and 14 days to arrive
+        </Text>
       </Box>
     </Stack>
   );
@@ -409,7 +405,7 @@ function AddToCartButton() {
       variants={variants}
       animate="visible"
       bg="gray.900"
-      height={14}
+      height={[16]}
       rounded="none"
       color="white"
       width="full"
