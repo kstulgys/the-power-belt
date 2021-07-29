@@ -8,7 +8,7 @@ export default function Faq() {
     <Layout>
       <Stack maxW="3xl" width="full" px={4} py={[10, 20]}>
         <Box>
-          <Text mb={[5, 10]} textAlign="center" fontSize={["3xl", "6xl"]} fontWeight="bold">
+          <Text as="h1" mb={[5, 10]} textAlign="center" fontSize={["3xl", "6xl"]} fontWeight="bold">
             FAQ
           </Text>
         </Box>

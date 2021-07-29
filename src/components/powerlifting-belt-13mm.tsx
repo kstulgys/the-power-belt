@@ -302,38 +302,47 @@ const discounts = [
 
 function ProductDescription() {
   return (
-    <Stack spacing={4} pt={[0, 10]}>
+    <Stack spacing={4}>
       <Box>
         <Text fontWeight="semibold" m={0}>
-          You love cycling, but long commutes and rough roads can be a literal pain in the butt.
+          You love weight lifting, but you have stopped progressing or your belt is just not good enough? Not a problem! If you are looking for a the best belt
+          to use for the rest of your life, your search is over!
         </Text>
       </Box>
 
       <Box>
         <Text m={0}>
-          The solution? Our 3D Gel Bike Seat Cushion. Simply stretch it over your bike seat before your next commute or cycling tour. Then enjoy cycling in
-          comfort, without the pain of a hard, uncomfortable bike saddle. The 3D Gel Bike Seat Cushion will save your butt.
+          This truly is the best powerlifting belt made. This belt is made for the strongest power lifters in the world! Single Prong Leather Weightlifting Belt
+          is example of the fine craftsmanship you will find with ThePowerBelt Products. Made from split cowhide 13mm thick leather blends, this belt will last.
+          This single prong rolling buckle belt measures in at 3/8″ or more precisely, 10 mm thick. This belt is easier to get on and off than a double prong
+          belt but it is still perfect for competition powerlifting and general weightlifting. This belt is not “padded” and is rigid in order to maximize
+          support. Orthopedic ally designed this belt has the ability to enhance the overall comfort and stability of the bones and make lifting easy which will
+          eventually help in achieving the best possible results. An ideal choice for olympic lifters, weightlifters, powerlifters, bodybuilders, crossfit
+          trainers and also for functional fitness exercises such as back squats, power cleans, dead lifts, overhead squats, clean and jerks and much more.
         </Text>
       </Box>
 
       <Box>
         <Text m={0}>
           <UnorderedList>
-            <ListItem>3D contoured gel seat makes for a comfortable ride </ListItem>
-            <ListItem>Stretches over any bike seat </ListItem>
-            <ListItem>Use for daily commutes or long cycle tours </ListItem>
-            <ListItem>Reflective tab on the back keeps you visible and safe </ListItem>
-            <ListItem>Unisex - perfect for male and female cyclists </ListItem>
-            <ListItem>Machine washable </ListItem>
+            <ListItem>Competition grade build 13-mm thick genuine cowhide split leather</ListItem>
+            <ListItem>{`4″ Width offers superior support & stabilizes back & core during lifting`}</ListItem>
+            <ListItem>Belt easily contours to the waist. Fully adjustable with multiple holes</ListItem>
+            <ListItem>Adjustable single prong 2mm thick-walled roller nickel steel buckle</ListItem>
+            <ListItem>Features double stitched seams prevents from wearing and tearing</ListItem>
+            <ListItem>Ideal for weightlifting, bodybuilding, powerlifting, crossfit, deadlift, squat, bench & other high-intensity training</ListItem>
+            <ListItem>Features double stitched seams prevents from wearing and tearing</ListItem>
           </UnorderedList>
         </Text>
       </Box>
       <Box>
-        <Text>Due to popular demand, this product takes between 20 and 30 days to arrive.</Text>
+        <Text>Due to popular demand, this product takes between 7 and 14 days to arrive.</Text>
       </Box>
     </Stack>
   );
 }
+
+// 13mm POWER LIFTING BELT
 
 function BuyNowToReceive() {
   return (

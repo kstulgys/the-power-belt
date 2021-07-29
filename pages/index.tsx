@@ -50,17 +50,14 @@ export default function Home() {
 function Heading({ onShopNowClick }) {
   return (
     <Stack minH={["full", "60vh"]} isInline height="full" justifyContent="center" alignItems="center" pb={12}>
-      <Box pt={[10, 0]} fontSize={["3xl", "6xl"]} fontWeight="bold">
-        <Text textAlign="center" m={0} lineHeight="shorter">
-          Empowering
+      <Box pt={[10, 0]} fontSize={["3xl", "6xl"]} fontWeight="bold" maxW="lg">
+        <Text as="h1" textAlign="center" m={0} lineHeight="shorter" fontWeight="bold">
+          Empowering Weight lifters
         </Text>
-        <Text textAlign="center" m={0}>
-          Weight lifters
+        <Text as="h2" textAlign="center" m={0} fontSize="lg" fontWeight="lighter">
+          Best quality, lifetime lasting belts for serious weight lifters
         </Text>
-        <Text textAlign="center" m={0} fontSize="lg" fontWeight="lighter">
-          Best quality, lifetime lasting belts for weight lifters
-        </Text>
-        <Stack isInline justifyContent="center" pt={4}>
+        <Stack isInline justifyContent="center" pt={5}>
           <Button
             rounded="none"
             bg="gray.900"

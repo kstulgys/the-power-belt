@@ -7,7 +7,7 @@ export default function RefundPolicy() {
     <Layout>
       <Stack mx="auto" maxW="3xl" width="full" px={4} pt={10}>
         <Box>
-          <Text mb={[5, 10]} textAlign="center" fontSize={["3xl", "6xl"]} fontWeight="bold">
+          <Text as="h1" mb={[5, 10]} textAlign="center" fontSize={["3xl", "6xl"]} fontWeight="bold">
             Refund Policy
           </Text>
         </Box>

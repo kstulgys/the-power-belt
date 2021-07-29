@@ -326,3 +326,5 @@ function MenuDrawer() {
     </>
   );
 }
+
+// I know Karolis was in his element in React: researching, delivering latest and greatest React tech in his work, spending free time rewriting Three.js games with React components, building web apps.
