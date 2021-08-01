@@ -33,40 +33,11 @@ import NextImage from "next/image";
 import { motion } from "framer-motion";
 import { FaqContent } from "@components/faq";
 import NextLink from "next/link";
-import { useBeltSelection } from "store";
+import { beltColors, beltSizes, useBeltSelection } from "store";
 import { FaCircle } from "react-icons/fa";
 
 declare const window: any;
 
-const beltColors = [
-  { color: "white", name: "white" },
-  { name: "lightGrey", color: "#BBC2D1" },
-  { name: "grey", color: "#7E858E" },
-  { name: "sand", color: "#C5C1AA" },
-  { name: "buckskin", color: "#9E815F" },
-  { name: "rust", color: "#8B4932" },
-  { name: "brown", color: "#3A2D2D" },
-  { name: "forestGreen", color: "#2A4147" },
-  { name: "loden", color: "#657743" },
-  { name: "mint", color: "#C0EECD" },
-  { name: "lineGreen", color: "#E2ED9F" },
-  { name: "yellow", color: "#ECDE7F" },
-  { name: "peach", color: "#EDC2A3" },
-  { name: "orange", color: "#E8AD6B" },
-  { name: "pink", color: "#E9C0CE" },
-  { name: "lavender", color: "#B3ACE7" },
-  { name: "aqua", color: "#9ADCF6" },
-  { name: "turquoise", color: "#5292D7" },
-  { name: "royalBlue", color: "#0A32AE" },
-  { name: "navyBlue", color: "#111A37" },
-  { name: "purple", color: "#4F286F" },
-  { name: "maroon", color: "#532732" },
-  { name: "red", color: "#CC514B" },
-  { name: "fuchsia", color: "#C850AF" },
-  { name: "black", color: "#0E161B" },
-];
-
-const beltSizes = ["S", "M", "L", "XL", "2xl"];
 // s 90cm
 // m 100cm
 // L 110cm
@@ -75,13 +46,10 @@ const beltSizes = ["S", "M", "L", "XL", "2xl"];
 // xxxl 130cm
 
 export function PowerliftingBelt13mm() {
-  const [sizeIndex, setSizeIndex] = React.useState(2);
-  const [colorIndex, setColorIndex] = React.useState(24);
-  const [stitchedIndex, setStitchedIndex] = React.useState(22);
   const { snap, setBeltColor, setBeltStitchedColor, setBeltSize } = useBeltSelection();
 
   const product = products[0];
-  const selectionName = `${snap.beltSize}/${snap.beltColor}/stitched:${snap.beltStitchedColor}`;
+  const selectionName = `${snap.beltSize}/${snap.beltColor.name}/stitched:${snap.beltStitchedColor.name}`;
 
   return (
     <Stack>
@@ -109,13 +77,13 @@ export function PowerliftingBelt13mm() {
               </Link>
             </NextLink>
           </Box>
-          <SelectionSection title="Selected">
+          {/* <SelectionSection title="Selected">
             <Stack height={14} borderColor="gray.900" borderWidth="2px" alignItems="center" justifyContent="center">
               <Text textAlign="center" m={0} fontSize="lg" textTransform="uppercase">
                 {selectionName}
               </Text>
             </Stack>
-          </SelectionSection>
+          </SelectionSection> */}
           <SelectionSection
             title={
               <Stack isInline alignItems="center">
@@ -161,7 +129,7 @@ export function PowerliftingBelt13mm() {
                   <AccordionButton py={3}>
                     <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
                       <Text m={0}>Belt</Text>
-                      <Box boxSize={6} rounded="full" bg={beltColors[colorIndex].color} borderWidth="1px" borderColor="gray.900" />
+                      <Box boxSize={6} rounded="full" bg={snap.beltColor.color} borderWidth="1px" borderColor="gray.900" />
                     </Stack>
                     <AccordionIcon />
                   </AccordionButton>
@@ -172,13 +140,13 @@ export function PowerliftingBelt13mm() {
                       return (
                         <WrapItem
                           key={color}
-                          boxShadow={snap.beltColor === name ? "outline" : "none"}
+                          boxShadow={snap.beltColor.name === name ? "outline" : "none"}
                           rounded="full"
                           _hover={{
                             boxShadow: "outline",
                           }}
                         >
-                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltColor(name)} _hover={{}} />
+                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltColor({ name, color })} _hover={{}} />
                         </WrapItem>
                       );
                     })}
@@ -190,7 +158,7 @@ export function PowerliftingBelt13mm() {
                   <AccordionButton py={3}>
                     <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
                       <Text m={0}>Stitched</Text>
-                      <Box boxSize={6} rounded="full" bg={beltColors[stitchedIndex].color} borderWidth="1px" borderColor="gray.900" />
+                      <Box boxSize={6} rounded="full" bg={snap.beltStitchedColor.color} borderWidth="1px" borderColor="gray.900" />
                     </Stack>
                     <AccordionIcon />
                   </AccordionButton>
@@ -201,13 +169,13 @@ export function PowerliftingBelt13mm() {
                       return (
                         <WrapItem
                           key={color}
-                          boxShadow={snap.beltStitchedColor === name ? "outline" : "none"}
+                          boxShadow={snap.beltStitchedColor.name === name ? "outline" : "none"}
                           rounded="full"
                           _hover={{
                             boxShadow: "outline",
                           }}
                         >
-                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltStitchedColor(name)} _hover={{}} />
+                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltStitchedColor({ name, color })} _hover={{}} />
                         </WrapItem>
                       );
                     })}
@@ -330,9 +298,7 @@ function ProductDescription() {
         </Text>
       </Box>
       <Box bg="red.100" p={4}>
-        <Text fontWeight="medium" m={0}>
-          Due to popular demand, this product takes between 7 and 14 days to arrive
-        </Text>
+        <Text m={0}>Due to popular demand, this product takes between 7 and 14 days to arrive</Text>
       </Box>
     </Stack>
   );
@@ -423,10 +389,10 @@ function AddToCartButton() {
       data-item-custom1-value={snap.beltSize}
       data-item-custom2-name="Belt color"
       data-item-custom2-options={colors}
-      data-item-custom2-value={snap.beltColor}
-      data-item-custom3-name="Belt stitched"
+      data-item-custom2-value={snap.beltColor.name}
+      data-item-custom3-name="Belt stitched color"
       data-item-custom3-options={colors}
-      data-item-custom3-value={snap.beltStitchedColor}
+      data-item-custom3-value={snap.beltStitchedColor.name}
     >
       Add to Cart
     </MotionBox>

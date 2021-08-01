@@ -17,6 +17,7 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Center,
+  Badge,
 } from "@chakra-ui/react";
 import React from "react";
 import { FiMail, FiMenu } from "react-icons/fi";
@@ -25,9 +26,13 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Footer } from "@components/footer";
 import NextLink from "next/link";
 import Head from "next/head";
+import { useRouter } from "next/dist/client/router";
 declare const window: any;
 
 export function Layout({ children, title = "", description = "" }) {
+  const router = useRouter();
+  const showLandingPhoto = router.route === "/";
+
   return (
     <>
       <Head>
@@ -40,9 +45,11 @@ export function Layout({ children, title = "", description = "" }) {
         <Stack spacing={0} width="full">
           <TopBar />
           <Navigation />
-          {/* <Box filter="grayscale(100%)" zIndex={1} top={0} left={0} h={["60vh"]} position="absolute" objectPosition="250px 125px">
-            <Image pt="7.5rem" src="/images/landing.jpg" width="full" objectFit="cover" filter="blur(5px)" height="full" />
-          </Box> */}
+          {showLandingPhoto && (
+            <Box display={["none", "block"]} zIndex={1} top={[24, 28]} left={0} h={["60vh"]} position="absolute">
+              <Image src="/images/stef-landing.png" width="full" objectFit="contain" height="full" />
+            </Box>
+          )}
         </Stack>
         <Center flexDir="column">{children}</Center>
         <Container maxW="3xl">
@@ -96,7 +103,7 @@ function TopBar() {
           </Stack>
           <Stack flex={1}>
             <Text textAlign="center" m={0} color="white">
-              FREE 7-14 days international shipping
+              FREE shipping 📦 | Promo code <Badge ml={1}>POWER10</Badge>
             </Text>
           </Stack>
           <Stack display={["none", "flex"]} flex={1} isInline justifyContent="flex-end" color="white" alignItems="center">

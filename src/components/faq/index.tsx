@@ -3,7 +3,7 @@ import React from "react";
 
 export function FaqContent() {
   return (
-    <Accordion allowMultiple defaultIndex={[0]} width="full">
+    <Accordion allowMultiple width="full">
       {faqList.map(({ title, content }) => (
         <AccordionItem key={title} bg="gray.200">
           <h2>
@@ -24,7 +24,7 @@ export function FaqContent() {
 const faqList = [
   {
     title: "How long are shipping times?",
-    content: `Your products will ship within two days of your order, and then take up to two weeks to reach your doorstep. Each product at ________ has an estimated
+    content: `Your products will ship within two days of your order, and then take up to two weeks to reach your doorstep. Each product at ThePowerBelt has an estimated
 delivery time that you can find in the product description.`,
   },
   {
