@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { proxy, useSnapshot } from "valtio";
 
 export const beltColors = [
@@ -37,9 +38,11 @@ export function useBeltSelection() {
   return {
     snap,
     setBeltColor: (color: string) => {
+      //@ts-ignore
       state.beltColor = color;
     },
     setBeltStitchedColor: (color: string) => {
+      //@ts-ignore
       state.beltStitchedColor = color;
     },
     setBeltSize: (size: string) => {

@@ -10,8 +10,6 @@ import NextNProgress from "nextjs-progressbar";
 const isDev = process.env.NODE_ENV === "development";
 const snipcartKey = isDev ? process.env.NEXT_PUBLIC_ENV_API_KEY_DEV : process.env.NEXT_PUBLIC_ENV_API_KEY_PROD;
 
-console.log({ snipcartKey });
-
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider theme={theme}>

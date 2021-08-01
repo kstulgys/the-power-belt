@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from "react";
 import {
   Stack,
@@ -146,6 +147,7 @@ export function PowerliftingBelt13mm() {
                             boxShadow: "outline",
                           }}
                         >
+                          {/* @ts-ignore */}
                           <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltColor({ name, color })} _hover={{}} />
                         </WrapItem>
                       );
@@ -175,6 +177,7 @@ export function PowerliftingBelt13mm() {
                             boxShadow: "outline",
                           }}
                         >
+                          {/* @ts-ignore */}
                           <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltStitchedColor({ name, color })} _hover={{}} />
                         </WrapItem>
                       );
