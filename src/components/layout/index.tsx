@@ -88,25 +88,25 @@ function TopBar() {
     <Stack height={10} bg="gray.900" isInline alignItems="center" spacing={0} zIndex={2}>
       <Container>
         <Stack isInline alignItems="center" fontSize={["sm"]}>
-          <Stack display={["none", "flex"]} flex={1} isInline alignItems="center" color="white">
+          {/* <Stack display={["none", "flex"]} flex={1} isInline alignItems="center" color="white">
             <Box>
               <Icon as={FaFacebook} fontSize="lg" strokeWidth="1.5" />
             </Box>
             <Box>
               <Text m={0}>Follow-us!</Text>
             </Box>
-          </Stack>
+          </Stack> */}
           <Stack flex={1}>
             <Text textAlign="center" m={0} color="white">
               FREE shipping worldwide 📦
             </Text>
           </Stack>
-          <Stack display={["none", "flex"]} flex={1} isInline justifyContent="flex-end" color="white" alignItems="center">
+          {/* <Stack display={["none", "flex"]} flex={1} isInline justifyContent="flex-end" color="white" alignItems="center">
             <Text m={0}>Get in touch</Text>
             <Box>
               <Icon as={FiMail} fontSize="md" strokeWidth="1.5" />
             </Box>
-          </Stack>
+          </Stack> */}
         </Stack>
       </Container>
     </Stack>
