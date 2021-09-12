@@ -12,25 +12,25 @@ export default function TermsOfServicePolicy() {
           </Text>
         </Box>
         <div>
-          <strong>OVERVIEW</strong> <br /> This website is operated by popup-store-demo. Throughout the site, the terms “we”, “us” and “our” refer to
-          popup-store-demo. popup-store-demo offers this website, including all information, tools and services available from this site to you, the user,
-          conditioned upon your acceptance of all terms, conditions, policies and notices stated here. <br /> <br /> By visiting our site and/ or purchasing
-          something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”), including
-          those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all users of the
-          site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content. <br /> <br /> Please read
-          these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound by these
-          Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any services. If
-          these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service. <br /> <br /> Any new features or tools
-          which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of Service at
-          any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or changes to our
-          website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website following the posting
-          of any changes constitutes acceptance of those changes. <br /> <br /> Our store is hosted on Shopify Inc. They provide us with the online e-commerce
-          platform that allows us to sell our products and services to you. <br /> <br /> <strong>SECTION 1 - ONLINE STORE TERMS</strong> <br /> By agreeing to
-          these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that you are the age of
-          majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use this site. <br /> You
-          may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in your jurisdiction
-          (including but not limited to copyright laws). <br /> You must not transmit any worms or viruses or any code of a destructive nature. <br /> A breach
-          or violation of any of the Terms will result in an immediate termination of your Services. <br /> <br />{" "}
+          <strong>OVERVIEW</strong> <br /> This website is operated by thepowerbelt. Throughout the site, the terms “we”, “us” and “our” refer to
+          team@thepowerbelt.com. team@thepowerbelt.com offers this website, including all information, tools and services available from this site to you, the
+          user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here. <br /> <br /> By visiting our site and/ or
+          purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions (“Terms of Service”, “Terms”),
+          including those additional terms and conditions and policies referenced herein and/or available by hyperlink. These Terms of Service apply to all
+          users of the site, including without limitation users who are browsers, vendors, customers, merchants, and/ or contributors of content. <br /> <br />{" "}
+          Please read these Terms of Service carefully before accessing or using our website. By accessing or using any part of the site, you agree to be bound
+          by these Terms of Service. If you do not agree to all the terms and conditions of this agreement, then you may not access the website or use any
+          services. If these Terms of Service are considered an offer, acceptance is expressly limited to these Terms of Service. <br /> <br /> Any new features
+          or tools which are added to the current store shall also be subject to the Terms of Service. You can review the most current version of the Terms of
+          Service at any time on this page. We reserve the right to update, change or replace any part of these Terms of Service by posting updates and/or
+          changes to our website. It is your responsibility to check this page periodically for changes. Your continued use of or access to the website
+          following the posting of any changes constitutes acceptance of those changes. <br /> <br /> Our store is hosted on Shopify Inc. They provide us with
+          the online e-commerce platform that allows us to sell our products and services to you. <br /> <br /> <strong>SECTION 1 - ONLINE STORE TERMS</strong>{" "}
+          <br /> By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence, or that
+          you are the age of majority in your state or province of residence and you have given us your consent to allow any of your minor dependents to use
+          this site. <br /> You may not use our products for any illegal or unauthorized purpose nor may you, in the use of the Service, violate any laws in
+          your jurisdiction (including but not limited to copyright laws). <br /> You must not transmit any worms or viruses or any code of a destructive
+          nature. <br /> A breach or violation of any of the Terms will result in an immediate termination of your Services. <br /> <br />{" "}
           <strong>SECTION 2 - GENERAL CONDITIONS</strong> <br /> We reserve the right to refuse service to anyone for any reason at any time. <br /> You
           understand that your content (not including credit card information), may be transferred unencrypted and involve (a) transmissions over various
           networks; and (b) changes to conform and adapt to technical requirements of connecting networks or devices. Credit card information is always
@@ -113,18 +113,18 @@ export default function TermsOfServicePolicy() {
           service and all products and services delivered to you through the service are (except as expressly stated by us) provided 'as is' and 'as available'
           for your use, without any representation, warranties or conditions of any kind, either express or implied, including all implied warranties or
           conditions of merchantability, merchantable quality, fitness for a particular purpose, durability, title, and non-infringement. <br /> In no case
-          shall popup-store-demo, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be
-          liable for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without
+          shall thepowerbelt, our directors, officers, employees, affiliates, agents, contractors, interns, suppliers, service providers or licensors be liable
+          for any injury, loss, claim, or any direct, indirect, incidental, punitive, special, or consequential damages of any kind, including, without
           limitation lost profits, lost revenue, lost savings, loss of data, replacement costs, or any similar damages, whether based in contract, tort
           (including negligence), strict liability or otherwise, arising from your use of any of the service or any products procured using the service, or for
           any other claim related in any way to your use of the service or any product, including, but not limited to, any errors or omissions in any content,
           or any loss or damage of any kind incurred as a result of the use of the service or any content (or product) posted, transmitted, or otherwise made
           available via the service, even if advised of their possibility. Because some states or jurisdictions do not allow the exclusion or the limitation of
           liability for consequential or incidental damages, in such states or jurisdictions, our liability shall be limited to the maximum extent permitted by
-          law. <br /> <br /> <strong>SECTION 14 - INDEMNIFICATION</strong> <br /> You agree to indemnify, defend and hold harmless popup-store-demo and our
-          parent, subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns
-          and employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach
-          of these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party. <br /> <br />{" "}
+          law. <br /> <br /> <strong>SECTION 14 - INDEMNIFICATION</strong> <br /> You agree to indemnify, defend and hold harmless thepowerbelt and our parent,
+          subsidiaries, affiliates, partners, officers, directors, agents, contractors, licensors, service providers, subcontractors, suppliers, interns and
+          employees, harmless from any claim or demand, including reasonable attorneys’ fees, made by any third-party due to or arising out of your breach of
+          these Terms of Service or the documents they incorporate by reference, or your violation of any law or the rights of a third-party. <br /> <br />{" "}
           <strong>SECTION 15 - SEVERABILITY</strong> <br /> In the event that any provision of these Terms of Service is determined to be unlawful, void or
           unenforceable, such provision shall nonetheless be enforceable to the fullest extent permitted by applicable law, and the unenforceable portion shall
           be deemed to be severed from these Terms of Service, such determination shall not affect the validity and enforceability of any other remaining
@@ -145,7 +145,7 @@ export default function TermsOfServicePolicy() {
           page. <br /> We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and
           changes to our website. It is your responsibility to check our website periodically for changes. Your continued use of or access to our website or the
           Service following the posting of any changes to these Terms of Service constitutes acceptance of those changes. <br /> <br />{" "}
-          <strong>SECTION 20 - CONTACT INFORMATION</strong> <br /> Questions about the Terms of Service should be sent to us at karolis.stulgys@gmail.com.
+          <strong>SECTION 20 - CONTACT INFORMATION</strong> <br /> Questions about the Terms of Service should be sent to us at team@thepowerbelt.com.
         </div>
       </Stack>
     </Layout>

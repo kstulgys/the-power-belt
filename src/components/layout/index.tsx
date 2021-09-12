@@ -27,12 +27,12 @@ import { Footer } from "@components/footer";
 import NextLink from "next/link";
 import Head from "next/head";
 import { useRouter } from "next/dist/client/router";
+import { useCart } from "store";
+import { DeleteIcon, CloseIcon } from "@chakra-ui/icons";
+
 declare const window: any;
 
-export function Layout({ children, title = "", description = "" }) {
-  const router = useRouter();
-  const showLandingPhoto = router.route === "/";
-
+export function Layout({ children, title = "ThePowerBelt Shop", description = "Best quality, lifetime lasting belts for weight lifters" }) {
   return (
     <>
       <Head>
@@ -45,11 +45,6 @@ export function Layout({ children, title = "", description = "" }) {
         <Stack spacing={0} width="full">
           <TopBar />
           <Navigation />
-          {showLandingPhoto && (
-            <Box display={["none", "block"]} zIndex={1} top={[24, 28]} left={0} h={["60vh"]} position="absolute">
-              <Image src="/images/stef-landing.png" width="full" objectFit="contain" height="full" />
-            </Box>
-          )}
         </Stack>
         <Center flexDir="column">{children}</Center>
         <Container maxW="3xl">
@@ -103,7 +98,7 @@ function TopBar() {
           </Stack>
           <Stack flex={1}>
             <Text textAlign="center" m={0} color="white">
-              FREE shipping 📦 | Promo code <Badge ml={1}>POWER10</Badge>
+              FREE shipping worldwide 📦
             </Text>
           </Stack>
           <Stack display={["none", "flex"]} flex={1} isInline justifyContent="flex-end" color="white" alignItems="center">
@@ -134,7 +129,7 @@ function Navigation() {
     zIndex: 3,
   };
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (!window) return;
     const handleStickyNav = () => {
       const offset = window.scrollY;
@@ -162,7 +157,7 @@ function Navigation() {
                     </Box>
                     <Box display={["none", "block"]}>
                       <Text fontSize="3xl" m={0} fontWeight="bold">
-                        ThePowerBelt
+                        The Power Belt
                       </Text>
                     </Box>
                   </Stack>
@@ -196,14 +191,9 @@ function Navigation() {
             </Stack>
             <Stack order={[3]} spacing={[0, 5]} flex={1} isInline justifyContent="flex-end" alignItems="center">
               <Box order={[2]}>
-                <Button variant="unstyled" className="snipcart-checkout" size="sm">
-                  <Icon as={HiOutlineShoppingBag} fontSize={["2xl"]} />
-                </Button>
+                <CartDrawer />
               </Box>
-
-              <Box order={[1]}>
-                <CurrencySelector />
-              </Box>
+              <Box order={[1]}>{/* <CurrencySelector /> */}</Box>
             </Stack>
           </Stack>
         </Container>
@@ -213,66 +203,153 @@ function Navigation() {
   );
 }
 
-function fetchCurrency() {
-  try {
-    const defaultCurrency = window.localStorage.getItem("currency");
-    if (defaultCurrency) {
-      return defaultCurrency;
-    } else {
-      window.localStorage.setItem("currency", "usd");
-      return "usd";
+function formatValue(price) {
+  const values = price.toString().split("");
+  const v = values.reduce((acc, next, idx) => {
+    if (idx === values.length - 2) {
+      return acc.concat("." + next);
     }
-  } catch ({ error }) {
-    console.log({ error });
-    return "usd";
-  }
+    return acc.concat(next);
+  }, "");
+  return v;
 }
 
-function postCurrency(currency) {
-  try {
-    window.localStorage.setItem("currency", currency);
-    return currency;
-  } catch ({ error }) {
-    console.log({ error });
-    return "usd";
-  }
-}
-
-function CurrencySelector() {
-  const [currentCurrency, setCurrentCurrency] = React.useState("");
-
-  React.useEffect(() => {
-    const updateCurrency = () => changeCurrency(fetchCurrency());
-    document.addEventListener("snipcart.ready", updateCurrency);
-    updateCurrency();
-  }, []);
-
-  const changeCurrency = (currency) => {
-    if (!window?.Snipcart) return;
-    const updatedCurrency = postCurrency(currency);
-    window.Snipcart.api.session.setCurrency(updatedCurrency);
-    setCurrentCurrency(updatedCurrency);
-  };
-
-  if (!currentCurrency) return null;
+function CartDrawer() {
+  const btnRef = React.useRef();
+  const snap = useCart();
 
   return (
-    <Select
-      value={currentCurrency}
-      onChange={({ target: { value } }) => changeCurrency(value)}
-      id="currencies"
-      width={["85px"]}
-      border="none"
-      rounded="md"
-      fontWeight="semibold"
-    >
-      <option value="usd">USD</option>
-      <option value="cad">CAD</option>
-      <option value="aud">AUD</option>
-      <option value="eur">EUR</option>
-    </Select>
+    <>
+      <Button ref={btnRef} onClick={snap.onOpen} variant="unstyled" size="sm">
+        <Icon as={HiOutlineShoppingBag} fontSize={["2xl"]} />
+      </Button>
+
+      <Drawer size="sm" isOpen={snap.isOpen} placement="right" onClose={snap.onClose} finalFocusRef={btnRef}>
+        <DrawerOverlay />
+        <DrawerContent>
+          <DrawerCloseButton />
+          <DrawerHeader>Cart</DrawerHeader>
+
+          <DrawerBody p={0} pl={4} pr={4}>
+            <Box display={snap.cartCount !== 0 ? "none" : "block"}>
+              <Text mt={20} textAlign="center" fontSize="sm">
+                Your cart is empty 😕
+              </Text>
+            </Box>
+            {snap.items.map(({ images, id, quantity, name, price, variantId, descriptor, updatedPrice }) => {
+              const value = snap.is20discount ? updatedPrice : price;
+              return (
+                <Stack isInline key={variantId} width="full" spacing={4} py={8}>
+                  <Stack minW={32} maxW={32}>
+                    <Image src={images[0]} width="full" my="auto" />
+                  </Stack>
+                  <Stack width="full" spacing={0}>
+                    <Stack isInline justifyContent="space-between">
+                      <Box>
+                        <Text fontWeight="semibold" fontSize={["sm", "md"]} m={0} isTruncated maxW={[40, 56]}>
+                          {name}
+                        </Text>
+                      </Box>
+                      <Box>
+                        <Button variant="unstyled" size="xs" onClick={() => snap.removeItem(variantId)} _hover={{ bg: "gray.100" }}>
+                          <CloseIcon fontSize={10} />
+                        </Button>
+                      </Box>
+                    </Stack>
+                    <Stack isInline>
+                      <Text m={0} fontSize="xs">
+                        {descriptor}
+                      </Text>
+                    </Stack>
+
+                    <Stack pt={3} isInline alignItems="center" justifyContent="space-between">
+                      <Stack isInline alignItems="center">
+                        <Button size="sm" onClick={() => snap.decrementItem(variantId)}>
+                          -
+                        </Button>
+                        <Text textAlign="center" minW={4} m={0} fontSize="sm" fontWeight="medium">
+                          {quantity}
+                        </Text>
+                        <Button size="sm" onClick={() => snap.incrementItem(variantId)}>
+                          +
+                        </Button>
+                      </Stack>
+                      <Box>
+                        <Text m={0} fontSize="sm" fontWeight="semibold">
+                          ${formatValue(value)}{" "}
+                          {snap.is20discount && (
+                            <Badge ml={2} colorScheme="red">
+                              -20%
+                            </Badge>
+                          )}
+                        </Text>
+                      </Box>
+                    </Stack>
+                  </Stack>
+                </Stack>
+              );
+            })}
+          </DrawerBody>
+          <DrawerFooter p={4} flexDirection="column">
+            <Box width="full">
+              <Button
+                isDisabled={!snap.cartCount}
+                fontWeight="medium"
+                bg="gray.900"
+                rounded="sm"
+                height={16}
+                width="full"
+                color="white"
+                onClick={snap.handleCheckout}
+                _hover={{}}
+              >
+                Checkout {snap.cartCount !== 0 && `- $${formatValue(snap.totalPrice)}`}
+              </Button>
+            </Box>
+          </DrawerFooter>
+        </DrawerContent>
+      </Drawer>
+    </>
   );
 }
+
+// function fetchCurrency() {
+//   try {
+//     const defaultCurrency = window.localStorage.getItem("currency");
+//     if (defaultCurrency) {
+//       return defaultCurrency;
+//     } else {
+//       window.localStorage.setItem("currency", "usd");
+//       return "usd";
+//     }
+//   } catch ({ error }) {
+//     console.log({ error });
+//     return "usd";
+//   }
+// }
+
+// function postCurrency(currency) {
+//   try {
+//     window.localStorage.setItem("currency", currency);
+//     return currency;
+//   } catch ({ message }) {
+//     console.log({ message });
+//     return "usd";
+//   }
+// }
+
+// function CurrencySelector() {
+//   const snap = useCart();
+
+//   return (
+//     <Select value={snap.currency} onChange={(e) => snap.updateCurrency(e.target.value)} width={["85px"]} border="none" rounded="md" fontWeight="semibold">
+//       <option value="usd">USD</option>
+//       <option value="cad">CAD</option>
+//       <option value="aud">AUD</option>
+//       <option value="eur">EUR</option>
+//     </Select>
+//   );
+// }
 
 function MenuDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -337,5 +414,3 @@ function MenuDrawer() {
     </>
   );
 }
-
-// I know Karolis was in his element in Reactjs: researching, delivering latest and greatest Reactjs UI in his work, spending free time rewriting Three.js games with React components, building web apps.

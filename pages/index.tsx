@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { FaqContent } from "@components/faq";
 import { PowerliftingBelt13mm } from "@components/powerlifting-belt-13mm";
 import NextLink from "next/link";
+import { useRouter } from "next/dist/client/router";
 
 declare const window: any;
 
@@ -36,13 +37,14 @@ export default function Home() {
       <Heading onShopNowClick={onShopNowClick} />
       <Container>
         <Stack ref={productsDivRef}>
-          <Box pb={[6, 12]} display={["none", "block"]}>
+          {/* <Box pb={[6, 12]} display={["none", "block"]}>
             <Text m={0} textAlign="center" fontSize="3xl" fontWeight="bold">
               Belts
             </Text>
-          </Box>
+          </Box> */}
+          {/* <Categories /> */}
         </Stack>
-        <ListBelts />
+        <FeaturedProduct />
       </Container>
     </Layout>
   );
@@ -50,92 +52,95 @@ export default function Home() {
 
 function Heading({ onShopNowClick }) {
   return (
-    <Stack height={["full", "60vh"]} isInline justifyContent="center" alignItems="center" pb={[12]} position="relative" width="full">
-      <Stack maxW={["xl"]} width="full" spacing={0} alignItems="center" pt={[10, 0]} fontWeight="bold" zIndex={2} px={4}>
-        <Text as="h1" textAlign="center" m={0} lineHeight="shorter" fontWeight="bold" fontSize={["4xl", "7xl"]}>
-          Empowering Weight lifters
-        </Text>
-        <Text as="h2" textAlign="center" m={0} fontSize="lg" fontWeight="lighter">
-          Best quality, lifetime lasting belts for serious weight lifters
-        </Text>
-        <Stack isInline justifyContent="center" pt={5}>
-          <Button
-            rounded="none"
-            bg="gray.900"
-            height={14}
-            color="white"
-            px={6}
-            _hover={{
-              bg: "gray.900",
-              boxShadow: "outline",
-            }}
-            onClick={onShopNowClick}
-          >
-            Shop Now
-          </Button>
+    <Stack height={["full", "60vh"]} isInline justifyContent="space-between" alignItems="center" pb={[12]} width="full">
+      <Stack alignItems="center" direction={["column", "row"]} spacing={12} maxW="7xl" mx="auto" width="full">
+        <Stack maxW={["xl"]} width="full" spacing={0} pt={[10, 0]} fontWeight="bold" zIndex={2} px={4}>
+          <Text as="h1" m={0} lineHeight="shorter" fontWeight="bold" fontSize={["4xl", "7xl"]}>
+            Empowering Weight lifters
+          </Text>
+          <Text as="h2" m={0} fontSize="lg" fontWeight="lighter">
+            Best quality, lifetime lasting belts for serious weight lifters
+          </Text>
+          <Stack isInline pt={5}>
+            <Button
+              rounded="none"
+              bg="gray.900"
+              height={14}
+              color="white"
+              px={6}
+              _hover={{
+                bg: "gray.900",
+                boxShadow: "outline",
+              }}
+              onClick={onShopNowClick}
+            >
+              Shop Now
+            </Button>
+          </Stack>
         </Stack>
+        <Box px={4} pl={[0, 20]}>
+          <Image src="/images/pwb/landing.png" />
+        </Box>
       </Stack>
     </Stack>
   );
 }
 
-function ListBelts() {
+function FeaturedProduct() {
   return (
-    <NextLink href="/product/powerlifting-belt-13mm" passHref>
-      <Link _hover={{}}>
-        <Stack spacing={[0, 16]}>
-          {/* <BeltsListHeader /> */}
-          <Stack direction={["column", "row"]} spacing={[4, 10]}>
-            <Stack
-              overflow="hidden"
-              boxSize={64}
-              width={["full", "50%"]}
-              bg="white"
-              boxShadow="base"
-              rounded="md"
-              p={4}
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Box height={40}>
-                <Image src={products[0].images[0]} objectFit="contain" height="full" />
-              </Box>
-              <Box>
-                <Text fontWeight="normal" m={0}>
-                  Powerlifting belt 10mm/13mm
-                </Text>
-              </Box>
-            </Stack>
-            <Stack
-              overflow="hidden"
-              boxSize={64}
-              width={["full", "50%"]}
-              bg="white"
-              boxShadow="base"
-              rounded="md"
-              p={4}
-              alignItems="center"
-              justifyContent="center"
-            >
-              <Box height={40}>
-                <Image src="/images/belts/lever-black.jpg" objectFit="contain" height="full" />
-              </Box>
-              <Box>
-                <Text fontWeight="normal" m={0}>
-                  Deadlifting belt 10mm (coming soon)
-                </Text>
-              </Box>
-            </Stack>
-          </Stack>
-          <Box pt={[10, 0]}>
-            <Text m={0} fontWeight="bold" fontSize={["3xl"]}>
-              Featured Product
-            </Text>
-          </Box>
-          <PowerliftingBelt13mm />
-        </Stack>
-      </Link>
-    </NextLink>
+    <Stack spacing={[0, 16]}>
+      {/* <Box pt={[10, 0]}>
+        <Text m={0} fontWeight="bold" fontSize={["3xl"]}>
+          Featured Product
+        </Text>
+      </Box> */}
+      <PowerliftingBelt13mm />
+    </Stack>
+  );
+}
+
+function Categories() {
+  return (
+    <Stack direction={["column", "row"]} spacing={[4, 7]}>
+      <Stack
+        overflow="hidden"
+        boxSize={[20, 40]}
+        width={["full", "50%"]}
+        bg="white"
+        boxShadow="base"
+        rounded="md"
+        p={4}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Box>
+          <NextLink href="/belts" passHref>
+            <Link fontSize={["lg", "xl"]} fontWeight="black" m={0}>
+              PREMIUM BELTS
+            </Link>
+          </NextLink>
+        </Box>
+      </Stack>
+      <Stack
+        overflow="hidden"
+        boxSize={[20, 40]}
+        width={["full", "50%"]}
+        bg="white"
+        boxShadow="base"
+        rounded="md"
+        p={4}
+        alignItems="center"
+        justifyContent="center"
+      >
+        <Box>
+          <NextLink href="/accessories" passHref>
+            <Link fontSize={["lg", "xl"]} fontWeight="black" m={0}>
+              ACCESSORIES
+            </Link>
+          </NextLink>
+        </Box>
+      </Stack>
+    </Stack>
   );
 }
 

@@ -1,35 +1,53 @@
 import { v4 as uuid } from "uuid";
+
 type Product = {
   id: string;
-  categories: string[];
-  price: string;
-  image: string;
+  categories?: string[];
+  price: number;
+  updatedPrice: number;
+  image?: string;
   name: string;
   images?: string[];
   description: string;
-  brand: string;
-  sku: string;
+  brand?: string;
+  sku?: string;
+  variants?: { [key: string]: any };
+  meta?: { [key: string]: string };
+  category?: string;
 };
 
-const productList = [
+const devOrigin = "https://d736-78-58-239-79.ngrok.io";
+const prodOrigin = "https://thepowerbelt.com";
+export const origin = process.env.NODE_ENV === "production" ? prodOrigin : devOrigin;
+
+const productList: Product[] = [
   {
-    categories: ["belts"],
-    name: "Powerlifting Belt",
-    priceOriginal: "130",
-    discountPercent: "55",
-    price: "59",
-    sizes: ["S", "M", "L", "XL", "2XL", "3XL", "4XL"],
-    // colors: ["black", "yellow", "red"],
-    // imageMain: "/images/powerlift_belts/1.png",
-    images: [
-      "/images/powerlift_belts/1.png",
-      "/images/powerlift_belts/2.png",
-      "/images/powerlift_belts/3.png",
-      "/images/powerlift_belts/4.png",
-      "/images/powerlift_belts/5.png",
-    ],
+    id: "B-102",
+    category: "belt",
+    name: "Powerlifting Belt 13mm",
     description:
       "Featuring a patented gliding lever, providing the adjustability of a prong belt with the ease and tightness of a lever belt. Ideal for sizing up or down whenever you need during training sessions and competitions.",
+    price: 15000,
+    updatedPrice: 15000,
+    images: [`${origin}/images/pwb/b-102.png`],
+  },
+  {
+    id: "B-101",
+    category: "belt",
+    name: "Deadlifting Belt 13mm",
+    description: "this is description",
+    price: 15000,
+    updatedPrice: 15000,
+    images: [`${origin}/images/pwb/b-101-103.png`],
+  },
+  {
+    id: "B-103",
+    category: "belt",
+    name: "Deadlifting Belt 10mm",
+    description: "this is description",
+    price: 15000,
+    updatedPrice: 15000,
+    images: [`${origin}/images/pwb/b-101-103.png`],
   },
 ];
 
@@ -258,6 +276,6 @@ const productList = [
 //     },
 // ];
 
-const products: any = productList.map((p) => ({ ...p, id: uuid() }));
+// const products: any = productList.map((p) => ({ ...p, id: uuid() }));
 
-export { products };
+export { productList as products };

@@ -13,8 +13,8 @@ export default function PrivacyPolicy() {
         </Box>
         <div>
           <p>
-            This Privacy Policy describes how popup-store-demo.myshopify.com (the “Site” or “we”) collects, uses, and discloses your Personal Information when
-            you visit or make a purchase from the Site.
+            This Privacy Policy describes how team@thepowerbelt.com (the “Site” or “we”) collects, uses, and discloses your Personal Information when you visit
+            or make a purchase from the Site.
           </p>
           <h1>Collecting Personal Information</h1>
           <p>

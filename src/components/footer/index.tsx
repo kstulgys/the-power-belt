@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Link, Center, Text, Stack, Image, Icon, Input, Button, Checkbox } from "@chakra-ui/react";
 import { FaFacebook } from "react-icons/fa";
 import NextLink from "next/link";
+import axios from "axios";
 
 function Container({ children }) {
   return (
@@ -12,6 +13,10 @@ function Container({ children }) {
 }
 
 export function Footer() {
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [email, setEmail] = React.useState("");
+  const [isChecked, setIsChecked] = React.useState(true);
+
   return (
     <Center flexDir="column" width="full" bg="gray.200">
       <Container>
@@ -38,7 +43,7 @@ export function Footer() {
                 </Box>
                 <Box>
                   <Text fontSize="2xl" m={0} fontWeight="bold">
-                    ThePowerBelt
+                    The Power Belt
                   </Text>
                 </Box>
               </Stack>
@@ -60,9 +65,14 @@ export function Footer() {
                 </Text>
               </Box>
               <Stack spacing={1}>
-                <Box>
+                {/* <Box>
                   <NextLink href="/policies/privacy">
                     <Link _hover={{}}>Privacy Policy</Link>
+                  </NextLink>
+                </Box> */}
+                <Box>
+                  <NextLink href="/faq">
+                    <Link _hover={{}}>FAQ</Link>
                   </NextLink>
                 </Box>
                 <Box>
@@ -70,11 +80,11 @@ export function Footer() {
                     <Link _hover={{}}>Terms Of Service</Link>
                   </NextLink>
                 </Box>
-                <Box>
+                {/* <Box>
                   <NextLink href="/policies/refund">
                     <Link _hover={{}}>Refund Policy</Link>
                   </NextLink>
-                </Box>
+                </Box> */}
                 <Box>
                   <NextLink href="/policies/shipping">
                     <Link _hover={{}}>Shipping Policy</Link>
@@ -90,8 +100,25 @@ export function Footer() {
               <Text m={0} fontSize="sm">
                 Receive discount codes and stay on top! We are expanding to provide more high quality services and products
               </Text>
-              <Stack as="form" spacing={3}>
+              <Stack
+                as="form"
+                spacing={3}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  setIsLoading(true);
+                  try {
+                    axios.post("/api/sheets", { email, isChecked });
+                  } catch (err) {
+                    console.log(err);
+                  } finally {
+                    setEmail("");
+                    setIsLoading(false);
+                  }
+                }}
+              >
                 <Input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   rounded="none"
                   fontSize="md"
                   type="email"
@@ -103,7 +130,7 @@ export function Footer() {
                     boxShadow: "outline",
                   }}
                 />
-                <Checkbox size="sm" defaultIsChecked>
+                <Checkbox borderWidth="1" borderColor="gray.400" size="sm" isChecked={isChecked} onChange={() => setIsChecked((prev) => !prev)}>
                   Keep me up to date on news and offers
                 </Checkbox>
                 <Button
@@ -115,6 +142,8 @@ export function Footer() {
                   _hover={{
                     boxShadow: "outline",
                   }}
+                  isLoading={isLoading}
+                  type="submit"
                 >
                   Subscribe
                 </Button>

@@ -23,6 +23,8 @@ import {
   OrderedList,
   UnorderedList,
   Icon,
+  SimpleGrid,
+  Input,
 } from "@chakra-ui/react";
 import { products } from "src/utils/products";
 import { Footer } from "@components/footer";
@@ -34,7 +36,7 @@ import NextImage from "next/image";
 import { motion } from "framer-motion";
 import { FaqContent } from "@components/faq";
 import NextLink from "next/link";
-import { beltColors, beltSizes, useBeltSelection } from "store";
+import { beltColors, beltSizes, beltTypes, ICartItem, useBeltSelection, useCart } from "store";
 import { FaCircle } from "react-icons/fa";
 
 declare const window: any;
@@ -47,10 +49,25 @@ declare const window: any;
 // xxxl 130cm
 
 export function PowerliftingBelt13mm() {
-  const { snap, setBeltColor, setBeltStitchedColor, setBeltSize } = useBeltSelection();
+  const { snap, setBeltSize, setBeltType } = useBeltSelection();
 
-  const product = products[0];
-  const selectionName = `${snap.beltSize}/${snap.beltColor.name}/stitched:${snap.beltStitchedColor.name}`;
+  const product = products.find(({ id }) => id === snap.beltType.id);
+  const selectionName = `size: ${snap.beltSize} / color: ${snap.beltColor.name} / stitching:${snap.beltStitchedColor.name}${
+    snap.writing ? ` / text: ${snap.writing}` : ""
+  }`;
+
+  const leftInStock = (() => {
+    const id = snap.beltType.id;
+    if (id === "B-102") {
+      return 31;
+    }
+    if (id === "B-101") {
+      return 27;
+    }
+    if (id === "B-103") {
+      return 13;
+    }
+  })();
 
   return (
     <Stack>
@@ -66,7 +83,7 @@ export function PowerliftingBelt13mm() {
             top={0}
             pt={[0, 24]}
           >
-            <Image src={product.images[0]} width="full" />
+            <Image src={product.images[0]} width="full" height="full" objectFit="contain" />
           </Stack>
         </Stack>
 
@@ -74,62 +91,105 @@ export function PowerliftingBelt13mm() {
           <Box textAlign={["center", "left"]}>
             <NextLink href="/product/powerlifting-belt-13mm" passHref>
               <Link m={0} fontSize={["2xl", "3xl"]} fontWeight="bold" _hover={{}}>
-                Powerlifting Belt 13mm
+                {snap.beltType.value}
               </Link>
             </NextLink>
           </Box>
-          {/* <SelectionSection title="Selected">
-            <Stack height={14} borderColor="gray.900" borderWidth="2px" alignItems="center" justifyContent="center">
-              <Text textAlign="center" m={0} fontSize="lg" textTransform="uppercase">
-                {selectionName}
-              </Text>
-            </Stack>
-          </SelectionSection> */}
-          <SelectionSection
-            title={
-              <Stack isInline alignItems="center">
-                <Box height={6} pt="3px">
-                  <Text m={0}>Size</Text>
-                </Box>
-                <Box>
-                  <Button m={0} textDecor="underline" rounded="none" borderColor="gray.900" height={6} fontSize="sm" variant="unstyled" fontWeight="normal">
-                    {/* <Box px={1}>
-                      <Icon as={MdStraighten} fontSize="2xl" strokeWidth="0" /> Size chart
-                    </Box> */}
-                    [chart]
-                  </Button>
-                </Box>
-              </Stack>
-            }
-          >
-            <Wrap>
-              {beltSizes.map((size, index) => {
-                return (
-                  <WrapItem key={size}>
-                    <Button
-                      borderColor="gray.900"
-                      borderWidth="2px"
-                      bg={snap.beltSize === size ? "gray.900" : "white"}
-                      color={snap.beltSize === size ? "white" : "gray.900"}
-                      boxSize={12}
-                      rounded="full"
-                      _hover={{}}
-                      onClick={() => setBeltSize(size)}
-                    >
-                      {size}
-                    </Button>
-                  </WrapItem>
-                );
-              })}
-            </Wrap>
-          </SelectionSection>
-          <SelectionSection title="Colors">
+
+          <SelectionSection title="Options">
             <Accordion allowToggle>
               <AccordionItem borderColor="gray.900">
                 <h2>
                   <AccordionButton py={3}>
                     <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
-                      <Text m={0}>Belt</Text>
+                      <Text m={0}>Belt type: {snap.beltType.value}</Text>
+                    </Stack>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <SimpleGrid columns={3} spacing={6} alignItems="center">
+                    {beltTypes.map(({ value, imagePath, id }) => {
+                      // const belt
+                      // const imgUrl = (()=> {
+                      //   if(snap.beltType.id === "B-102"){
+                      //     return '/public/images/pwb/b-102.png'
+                      //   }else {
+                      //     return '/public/images/pwb/b-101-b-103.png'
+                      //   }
+                      // })()
+
+                      return (
+                        <Box rounded="sm" key={value} boxShadow={snap.beltType.value === value ? "outline" : "none"}>
+                          <Stack
+                            // boxSize={28}
+                            // fontWeight="normal"
+                            // width="full"
+                            // borderColor="gray.900"
+                            // borderWidth="1px"
+                            // bg={snap.beltType.value === value ? "gray.900" : "white"}
+                            // color={snap.beltType.value === value ? "white" : "gray.900"}
+                            // rounded="sm"
+                            // _hover={{}}
+                            onClick={() => setBeltType({ value, id, imagePath })}
+                          >
+                            <Box flex={1}>
+                              <Image src={imagePath} />
+                            </Box>
+                            <Box>
+                              <Text m={0} fontSize="xs" textAlign="center">
+                                {value}
+                              </Text>
+                            </Box>
+                          </Stack>
+                        </Box>
+                      );
+                    })}
+                  </SimpleGrid>
+                </AccordionPanel>
+              </AccordionItem>
+              <AccordionItem borderColor="gray.900">
+                <h2>
+                  <AccordionButton py={3}>
+                    <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
+                      <Text m={0}>Size: {snap.beltSize}</Text>
+                      {/* <Box boxSize={6} rounded="full" bg={snap.beltColor.color} borderWidth="1px" borderColor="gray.900" /> */}
+                    </Stack>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <Text fontSize="sm">[lable-length]</Text>
+                  <Stack>
+                    <SimpleGrid columns={2} spacing={4}>
+                      {beltSizes.map(({ lable, value }, index) => {
+                        return (
+                          <Box key={value}>
+                            <Button
+                              fontWeight="normal"
+                              width="full"
+                              borderColor="gray.900"
+                              borderWidth="1px"
+                              bg={snap.beltSize === value ? "gray.900" : "white"}
+                              color={snap.beltSize === value ? "white" : "gray.900"}
+                              rounded="sm"
+                              _hover={{}}
+                              onClick={() => setBeltSize(value)}
+                            >
+                              {lable}
+                            </Button>
+                          </Box>
+                        );
+                      })}
+                    </SimpleGrid>
+                  </Stack>
+                </AccordionPanel>
+              </AccordionItem>
+              <AccordionItem borderColor="gray.900">
+                <h2>
+                  <AccordionButton py={3}>
+                    <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
+                      <Text m={0}>Belt color:</Text>
                       <Box boxSize={6} rounded="full" bg={snap.beltColor.color} borderWidth="1px" borderColor="gray.900" />
                     </Stack>
                     <AccordionIcon />
@@ -137,20 +197,8 @@ export function PowerliftingBelt13mm() {
                 </h2>
                 <AccordionPanel pb={4}>
                   <Wrap>
-                    {beltColors.map(({ name, color }, index) => {
-                      return (
-                        <WrapItem
-                          key={color}
-                          boxShadow={snap.beltColor.name === name ? "outline" : "none"}
-                          rounded="full"
-                          _hover={{
-                            boxShadow: "outline",
-                          }}
-                        >
-                          {/* @ts-ignore */}
-                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltColor({ name, color })} _hover={{}} />
-                        </WrapItem>
-                      );
+                    {beltColors.map((props) => {
+                      return <Dot type="color" key={props.color} {...props} />;
                     })}
                   </Wrap>
                 </AccordionPanel>
@@ -159,7 +207,7 @@ export function PowerliftingBelt13mm() {
                 <h2>
                   <AccordionButton py={3}>
                     <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
-                      <Text m={0}>Stitched</Text>
+                      <Text m={0}>Stitching color:</Text>
                       <Box boxSize={6} rounded="full" bg={snap.beltStitchedColor.color} borderWidth="1px" borderColor="gray.900" />
                     </Stack>
                     <AccordionIcon />
@@ -167,22 +215,34 @@ export function PowerliftingBelt13mm() {
                 </h2>
                 <AccordionPanel pb={4}>
                   <Wrap>
-                    {beltColors.map(({ name, color }, index) => {
-                      return (
-                        <WrapItem
-                          key={color}
-                          boxShadow={snap.beltStitchedColor.name === name ? "outline" : "none"}
-                          rounded="full"
-                          _hover={{
-                            boxShadow: "outline",
-                          }}
-                        >
-                          {/* @ts-ignore */}
-                          <Button boxSize={10} rounded="full" bg={color} tabIndex={0} onClick={() => setBeltStitchedColor({ name, color })} _hover={{}} />
-                        </WrapItem>
-                      );
+                    {beltColors.map((props) => {
+                      return <Dot type="stitching" key={props.color} {...props} />;
                     })}
                   </Wrap>
+                </AccordionPanel>
+              </AccordionItem>
+              <AccordionItem borderColor="gray.900">
+                <h2>
+                  <AccordionButton py={3}>
+                    <Stack spacing={3} isInline flex="1" textAlign="left" fontSize="md" alignItems="center">
+                      <Text m={0}>
+                        Text inside the belt:{" "}
+                        {snap.writing ? (
+                          <Box as="span" fontWeight="bold">
+                            YES
+                          </Box>
+                        ) : (
+                          <Box as="span" fontWeight="bold">
+                            NO
+                          </Box>
+                        )}
+                      </Text>
+                    </Stack>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>
+                  <InputBeltInside />
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
@@ -197,7 +257,7 @@ export function PowerliftingBelt13mm() {
                   <Text m={0}>
                     Only{" "}
                     <Box as="span" fontWeight="semibold">
-                      37
+                      {leftInStock}
                     </Box>{" "}
                     left in stock
                   </Text>
@@ -208,7 +268,7 @@ export function PowerliftingBelt13mm() {
             <BulkOrder />
           </SelectionSection>
           <Stack spacing={4}>
-            <AddToCartButton />
+            <AddToCartButton product={product} descriptor={selectionName} />
             <SafeCheckoutLogos />
             {/* <BuyNowToReceive /> */}
           </Stack>
@@ -223,6 +283,53 @@ export function PowerliftingBelt13mm() {
         </Stack>
       </Stack>
     </Stack>
+  );
+}
+
+function InputBeltInside() {
+  const { setWriting, snap } = useBeltSelection();
+  const ref = React.useRef(null);
+
+  React.useEffect(() => {
+    ref?.current?.focus();
+  }, []);
+
+  return (
+    <>
+      <Box pb={3}>
+        <Button size="xs" bg="gray.200" onClick={() => setWriting({ target: { value: "" } })}>
+          Remove text
+        </Button>
+      </Box>
+      <Input ref={ref} rounded="sm" borderColor="gray.400" value={snap.writing} onChange={setWriting} />
+    </>
+  );
+}
+
+function Dot({ name, color, type }) {
+  const { snap, setBeltColor, setBeltStitchedColor } = useBeltSelection();
+  const isSelected = (() => {
+    if (type === "color") return snap.beltColor.name === name;
+    return snap.beltStitchedColor.name === name;
+  })();
+
+  const onClick = (() => {
+    if (type === "color") return setBeltColor;
+    return setBeltStitchedColor;
+  })();
+
+  return (
+    <WrapItem
+      key={color}
+      boxShadow={isSelected ? "outline" : "none"}
+      rounded="full"
+      _hover={{
+        boxShadow: "outline",
+      }}
+    >
+      {/* @ts-ignore */}
+      <Button boxSize={8} size="sm" rounded="full" bg={color} tabIndex={0} onClick={() => onClick({ name, color })} _hover={{}} />
+    </WrapItem>
   );
 }
 
@@ -243,11 +350,11 @@ function BulkOrder() {
               </Box>
               <Box>
                 <Text m={0} fontWeight="semibold" textDecor="line-through" color="gray.500">
-                  ${prevPrice}
+                  {"$" + prevPrice}
                 </Text>
               </Box>
               <Box>
-                <Badge mt="-3px" fontSize="sm" color="white" bg="gray.900" px={2}>
+                <Badge mt="-3px" fontSize={["xs", "sm"]} color="white" bg="gray.900" px={2}>
                   {saveText}
                 </Badge>
               </Box>
@@ -260,51 +367,78 @@ function BulkOrder() {
 }
 
 const discounts = [
-  { quantity: 1, price: "129.00", prevPrice: "129.00", saveText: null },
-  { quantity: 2, price: "232.20", prevPrice: "258.00", saveText: "save 10%" },
-  { quantity: 5, price: "477.30", prevPrice: "645.00", saveText: "save 26%" },
+  { quantity: 1, price: "150.00", prevPrice: "210.00", saveText: "-40% regular price" },
+  { quantity: 2, price: "240.00", prevPrice: "300", saveText: "save 20%" },
+  { quantity: 5, price: "600", prevPrice: "750", saveText: "5th for free" },
 ];
 
 function ProductDescription() {
+  const { snap } = useBeltSelection();
+  const isLongDelivery = snap.beltType.id !== "B-102";
+
   return (
     <Stack spacing={4}>
       <Box>
         <Text fontWeight="semibold" m={0}>
-          You love weight lifting, but you have stopped progressing or your belt is just not good enough? Not a problem! If you are looking for a the best belt
-          to use for the rest of your life, your search is over!
+          You love weight lifting, but you have stopped progressing or your belt is just not good enough? If you are looking for the best belt to use for the
+          rest of your life, your search is over!
         </Text>
       </Box>
 
       <Box>
         <Text m={0}>
-          This truly is the best powerlifting belt made. This belt is made for the strongest power lifters in the world! Single Prong Leather Weightlifting Belt
-          is example of the fine craftsmanship you will find with ThePowerBelt Products. Made from split cowhide 13mm thick leather blends, this belt will last.
-          This single prong rolling buckle belt measures in at 3/8″ or more precisely, 10 mm thick. This belt is easier to get on and off than a double prong
-          belt but it is still perfect for competition powerlifting and general weightlifting. This belt is not “padded” and is rigid in order to maximize
-          support. Orthopedic ally designed this belt has the ability to enhance the overall comfort and stability of the bones and make lifting easy which will
-          eventually help in achieving the best possible results. An ideal choice for olympic lifters, weightlifters, powerlifters, bodybuilders, crossfit
-          trainers and also for functional fitness exercises such as back squats, power cleans, dead lifts, overhead squats, clean and jerks and much more.
+          This truly is the best powerlifting belt made. This belt is made for the strongest power lifters and it's an example of the fine craftsmanship you
+          will find with ThePowerBelt Products. Made from split cowhide 10/13mm thick leather blends, this belt will last. This belt is easy to get on and off
+          and it's perfect for competition powerlifting and general weightlifting. This belt is made to maximize support. Orthopedically designed this belt has
+          the ability to enhance the overall comfort and stability of the bones and make lifting easy which will eventually help in achieving the best possible
+          results. An ideal choice for olympic lifters, weightlifters, powerlifters, bodybuilders, crossfit trainers and also for functional fitness exercises
+          such as back squats, power cleans, dead lifts, overhead squats, clean and jerks and much more.
         </Text>
       </Box>
 
       <Box>
         <Text m={0}>
           <UnorderedList>
-            <ListItem>Competition grade build 13-mm thick genuine cowhide split leather</ListItem>
-            <ListItem>{`4″ Width offers superior support & stabilizes back & core during lifting`}</ListItem>
+            <ListItem>Competition grade build 10/13mm thick genuine cowhide split leather</ListItem>
+            <ListItem>{`Offers superior support & stabilizes back & core during lifting`}</ListItem>
             <ListItem>Belt easily contours to the waist. Fully adjustable with multiple holes</ListItem>
-            <ListItem>Adjustable single prong 2mm thick-walled roller nickel steel buckle</ListItem>
+            {/* <ListItem>Adjustable single prong 2mm thick-walled roller nickel steel buckle</ListItem> */}
             <ListItem>Features double stitched seams prevents from wearing and tearing</ListItem>
             <ListItem>Ideal for weightlifting, bodybuilding, powerlifting, crossfit, deadlift, squat, bench & other high-intensity training</ListItem>
-            <ListItem>Features double stitched seams prevents from wearing and tearing</ListItem>
           </UnorderedList>
         </Text>
       </Box>
       <Box bg="red.100" p={4}>
-        <Text m={0}>Due to popular demand, this product takes between 7 and 14 days to arrive</Text>
+        {isLongDelivery ? (
+          <Text m={0}>Due to popular demand, this product takes between 2 and 4 weeks to arrive</Text>
+        ) : (
+          <Text m={0}>Due to popular demand, this product takes between 7 and 14 days to arrive</Text>
+        )}
       </Box>
     </Stack>
   );
+}
+
+{
+  /* <ListItem>Competition grade build 13-mm thick genuine cowhide split leather</ListItem>
+<ListItem>{`4″ Width offers superior support & stabilizes back & core during lifting`}</ListItem>
+<ListItem>Belt easily contours to the waist. Fully adjustable with multiple holes</ListItem>
+<ListItem>Adjustable single prong 2mm thick-walled roller nickel steel buckle</ListItem>
+<ListItem>Features double stitched seams prevents from wearing and tearing</ListItem>
+<ListItem>Ideal for weightlifting, bodybuilding, powerlifting, crossfit, deadlift, squat, bench & other high-intensity training</ListItem>
+<ListItem>Features double stitched seams prevents from wearing and tearing</ListItem> */
+}
+
+{
+  /* <Text m={0}>
+This truly is the best powerlifting belt made. This belt is made for the strongest power lifters and it's an example of the fine craftsmanship you
+will find with ThePowerBelt Products. Made from split cowhide 10/13mm thick leather blends, this belt will last. This single prong rolling buckle belt
+measures in at 3/8″ or more precisely, 10 mm thick. This belt is easier to get on and off than a double prong belt but it is still perfect for
+competition powerlifting and general weightlifting. This belt is not “padded” and is rigid in order to maximize support. Orthopedic ally designed this
+belt has the ability to enhance the overall comfort and stability of the bones and make lifting easy which will eventually help in achieving the best
+possible results. An ideal choice for olympic lifters, weightlifters, powerlifters, bodybuilders, crossfit trainers and also for functional fitness
+exercises such as back squats, power cleans, dead lifts, overhead squats, clean and jerks and much more.
+</Text> */
 }
 
 // 13mm POWER LIFTING BELT
@@ -348,20 +482,40 @@ const variants = {
   },
 };
 
-const colors = beltColors.reduce((acc, { name }, index) => {
-  if (!acc) return acc.concat(`${name}|`);
-  if (beltColors.length - 1 === index) return acc.concat(name);
-  return acc.concat(`${name}|`);
-}, "");
+// const colors = beltColors.reduce((acc, { name }, index) => {
+//   if (!acc) return acc.concat(`${name}|`);
+//   if (beltColors.length - 1 === index) return acc.concat(name);
+//   return acc.concat(`${name}|`);
+// }, "");
 
-const sizes = beltSizes.reduce((acc, size, index) => {
-  if (!acc) return acc.concat(`${size}|`);
-  if (beltSizes.length - 1 === index) return acc.concat(size);
-  return acc.concat(`${size}|`);
-}, "");
+// const sizes = beltSizes.reduce((acc, size, index) => {
+//   if (!acc) return acc.concat(`${size}|`);
+//   if (beltSizes.length - 1 === index) return acc.concat(size);
+//   return acc.concat(`${size}|`);
+// }, "");
 
-function AddToCartButton() {
-  const { snap, setBeltColor, setBeltStitchedColor, setBeltSize } = useBeltSelection();
+function AddToCartButton({ product, descriptor }) {
+  const { snap } = useBeltSelection();
+  const snapshot = useCart();
+
+  const item: ICartItem = {
+    ...product,
+    descriptor,
+    variant: {
+      name: product.name,
+      size: snap.beltSize,
+      color: snap.beltColor.name,
+      stitchedColor: snap.beltStitchedColor.name,
+      text: snap.writing || "none",
+    },
+    meta: {
+      name: product.name,
+      size: snap.beltSize,
+      color: snap.beltColor,
+      stitchedColor: snap.beltStitchedColor,
+      text: snap.writing || "none",
+    },
+  };
 
   return (
     <MotionBox
@@ -378,24 +532,9 @@ function AddToCartButton() {
       rounded="none"
       color="white"
       width="full"
-      // snipcart stuff
-      className="snipcart-add-item"
-      data-item-id="1"
-      // eslint-disable-next-line prettier/prettier
-      data-item-price="{&quot;usd&quot;: 129.00, &quot;cad&quot;: 162.00, &quot;eur&quot;: 109.00, &quot;aud&quot;: 175.00}"
-      data-item-url="/product/powerlifting-belt-13mm"
-      data-item-description="Lifetime lasting, best quality, 13mm powerlifting belt"
-      data-item-image={products[0].images[0]}
-      data-item-name="Powerlifting Belt 13mm"
-      data-item-custom1-name="Size"
-      data-item-custom1-options={sizes}
-      data-item-custom1-value={snap.beltSize}
-      data-item-custom2-name="Belt color"
-      data-item-custom2-options={colors}
-      data-item-custom2-value={snap.beltColor.name}
-      data-item-custom3-name="Belt stitched color"
-      data-item-custom3-options={colors}
-      data-item-custom3-value={snap.beltStitchedColor.name}
+      onClick={() => {
+        snapshot.addItem(item);
+      }}
     >
       Add to Cart
     </MotionBox>
