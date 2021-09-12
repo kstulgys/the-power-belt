@@ -15,7 +15,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="description" content="Best quality, lifetime lasting belts for weight lifters"></meta>
         <meta property="og:url" content="https://thepowerbelt.com" />
         <meta property="og:type" content="website" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
       </Head>
