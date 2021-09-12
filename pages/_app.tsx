@@ -10,9 +10,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <ChakraProvider theme={theme}>
       <Head>
-        <title>ThePowerBelt Shop</title>
+        <title>ThePowerBelt | The #1 lifting belts store for Powerlifters and Weightlifters</title>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-        <meta name="description" content="Best quality, lifetime lasting belts for weight lifters"></meta>
+        <meta
+          name="description"
+          content="This truly is the best powerlifting belt made. This belt is made for the strongest power lifters and it's an example of the fine craftsmanship you will find with ThePowerBelt Products. Made from split cowhide 10/13mm thick leather blends, this belt will last. This belt is easy to get on and off and it's perfect for competition powerlifting and general weightlifting. This belt is made to maximize support. Orthopedically designed this belt has the ability to enhance the overall comfort and stability of the bones and make lifting easy which will eventually help in achieving the best possible results. An ideal choice for olympic lifters, weightlifters, powerlifters, bodybuilders, crossfit trainers and also for functional fitness exercises such as back squats, power cleans, dead lifts, overhead squats, clean and jerks and much more."
+        ></meta>
         <meta property="og:url" content="https://thepowerbelt.com" />
         <meta property="og:type" content="website" />
         <link rel="shortcut icon" href="/favicon.ico" />

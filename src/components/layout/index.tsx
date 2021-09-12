@@ -32,7 +32,11 @@ import { DeleteIcon, CloseIcon } from "@chakra-ui/icons";
 
 declare const window: any;
 
-export function Layout({ children, title = "ThePowerBelt Shop", description = "Best quality, lifetime lasting belts for weight lifters" }) {
+export function Layout({
+  children,
+  title = `ThePowerBelt | The #1 lifting belts store for Powerlifters and Weightlifters`,
+  description = `This truly is the best powerlifting belt made. This belt is made for the strongest power lifters and it's an example of the fine craftsmanship you will find with ThePowerBelt Products. Made from split cowhide 10/13mm thick leather blends, this belt will last. This belt is easy to get on and off and it's perfect for competition powerlifting and general weightlifting. This belt is made to maximize support. Orthopedically designed this belt has the ability to enhance the overall comfort and stability of the bones and make lifting easy which will eventually help in achieving the best possible results. An ideal choice for olympic lifters, weightlifters, powerlifters, bodybuilders, crossfit trainers and also for functional fitness exercises such as back squats, power cleans, dead lifts, overhead squats, clean and jerks and much more.`,
+}) {
   return (
     <>
       <Head>
