@@ -21,11 +21,11 @@ export function Footer() {
     <Center flexDir="column" width="full" bg="gray.200">
       <Container>
         <Stack px={4} height={[20]} width="full" direction={["column", "row"]} justifyContent={["center", "space-between"]} alignItems="center">
-          <Box>
+          {/* <Box>
             <Text m={0} textAlign={["center", "left"]} fontWeight="semibold">
               Follow-us on social media
             </Text>
-          </Box>
+          </Box> */}
           <Box>
             <Link isExternal href="https://www.facebook.com/artunden">
               <Icon as={FaFacebook} fontSize="2xl" />
@@ -52,11 +52,11 @@ export function Footer() {
                   <Text m={0}>Empowering Weight lifters by providing best quality, lifetime lasting weight lifting belts</Text>
                 </Box>
               </Stack>
-              <Box>
+              {/* <Box>
                 <Link isExternal href="https://www.facebook.com/artunden">
                   team@thepowerbelt.com
                 </Link>
-              </Box>
+              </Box> */}
             </Stack>
             <Stack flex={0.2}>
               <Box>
